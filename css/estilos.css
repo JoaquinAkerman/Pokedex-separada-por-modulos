@@ -1,0 +1,46 @@
+#pokedex{
+    float: center;
+    border-style: solid;
+	border-color: red;
+	border-top-width: 50px;
+	border-right-width: 1em;
+	border-bottom-width: 10px;
+	border-left-width: 1em;
+	background-color: blanchedalmond;
+	margin: 0 auto
+	    
+}
+
+#informacion-del-pokemon{
+	border-style: solid;
+	border-color: black;
+	border-top-width: 1em;
+	border-right-width: 1em;
+	border-bottom-width: 1em;
+	border-left-width: 1em;
+}
+#botonera-pokemon{
+background-color:brown;}
+
+
+
+#botonera-pokemon{
+	
+    float: left;
+    display: inline-flex;}
+
+#imagen-pokemon{background-color: black;}
+
+#informacion-del-pokemon{background-color: burlywood;}
+
+.oculto{display: none;}
+
+#imagen-de-fondo{background-image: 
+    linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url(https://i.ibb.co/yPtYv38/fondo-pokemon.jpg);
+height: auto;
+width: auto;
+}
