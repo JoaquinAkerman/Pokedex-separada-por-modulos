@@ -1,5 +1,9 @@
 import { obtenerPropiedadesPokemon, listarPokemones } from './API.js';
-import { mostrarTipos, mostrarHabilidades } from './funciones.js';
+import {
+  mostrarTipos,
+  mostrarHabilidades,
+  guardarPokemonEnLocalStorage,
+} from './funciones.js';
 
 const crearPaginador = (cantidadDePaginas, paginaActiva) => {
   const $paginador = document.getElementById('paginador');
@@ -32,6 +36,7 @@ const mostrarPaginaActual = (numeroDePagina) => {
 };
 
 const mostrarPokemonSeleccionado = (infoJsonDelPokemonSeleccionado) => {
+  guardarPokemonEnLocalStorage(infoJsonDelPokemonSeleccionado);
   const $nombrePokemon = document.querySelector('#nombre');
   const $IDPokemon = document.querySelector('#ID');
   let $tipoPokemon = document.querySelector('#tipo');
@@ -85,11 +90,15 @@ const armarBotonesPokemones = (infoPokemon) => {
     option.classList = 'botones btn btn-dark ';
     $listaDePokemones.append(option);
     option.addEventListener('click', () => {
-      const pokemonSeleccionado = document.querySelector(`#${option.id}`).value;
+      const nombrePokemonSeleccionado = document.querySelector(`#${option.id}`)
+        .value;
       const urlPokemonSeleccionado = document
-        .querySelector(`#${pokemonSeleccionado}`)
+        .querySelector(`#${nombrePokemonSeleccionado}`)
         .getAttribute('data-url');
-      obtenerPropiedadesPokemon(urlPokemonSeleccionado);
+      obtenerPropiedadesPokemon(
+        urlPokemonSeleccionado,
+        nombrePokemonSeleccionado
+      );
     });
   });
 };

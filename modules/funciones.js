@@ -13,10 +13,19 @@ const mostrarTipos = (arrayDeTipos, $selector) => {
 
 const mostrarHabilidades = (arrayDeHabilidades, $selector) => {
   $selector.innerText = 'Habilidades :';
-  console.log(arrayDeHabilidades);
   arrayDeHabilidades.forEach((habilidades) => {
     $selector.append(` "${habilidades.ability.name}" `);
   });
 };
 
-export { calcularCantidadPaginas, mostrarTipos, mostrarHabilidades };
+const guardarPokemonEnLocalStorage = (pokemonEnJson) => {
+  let pokemonEnString = JSON.stringify(pokemonEnJson);
+  localStorage.setItem(pokemonEnJson.forms[0].name, pokemonEnString);
+};
+
+export {
+  guardarPokemonEnLocalStorage,
+  calcularCantidadPaginas,
+  mostrarTipos,
+  mostrarHabilidades,
+};

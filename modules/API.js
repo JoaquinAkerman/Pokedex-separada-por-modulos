@@ -31,18 +31,28 @@ const listarPokemones = async (direccionAPI, paginaActiva = 1) => {
   }
 };
 
-const obtenerPropiedadesPokemon = async (urlDelPokemon) => {
-  try {
-    mostrarYOcultarCargando();
-    const respuestaDeApiInfoPokemon = await fetch(urlDelPokemon);
-    const respuestaDeApiInfoPokemonEnJson = await respuestaDeApiInfoPokemon.json();
-    mostrarPokemonSeleccionado(respuestaDeApiInfoPokemonEnJson);
-    mostrarYOcultarCargando();
-  } catch (error) {
-    return console.error(
-      'falló cargar el pokemon seleccionado, intente nuevamente',
-      error
-    );
+const obtenerPropiedadesPokemon = async (urlDelPokemon, nombreDelPokemon) => {
+  {
+    try {
+      mostrarYOcultarCargando();
+      const pokemonEnLocalStorage = localStorage.getItem(nombreDelPokemon);
+      if (pokemonEnLocalStorage == undefined) {
+        const respuestaDeApiInfoPokemon = await fetch(urlDelPokemon);
+        const respuestaDeApiInfoPokemonEnJson = await respuestaDeApiInfoPokemon.json();
+        mostrarPokemonSeleccionado(respuestaDeApiInfoPokemonEnJson);
+        console.log(`se buscó desde la API a ${nombreDelPokemon}`);
+        mostrarYOcultarCargando();
+      } else {
+        mostrarPokemonSeleccionado(JSON.parse(pokemonEnLocalStorage));
+        mostrarYOcultarCargando();
+        console.log(`se buscó desde localStorage a ${nombreDelPokemon}`);
+      }
+    } catch (error) {
+      return console.error(
+        'falló cargar el pokemon seleccionado, intente nuevamente',
+        error
+      );
+    }
   }
 };
 
