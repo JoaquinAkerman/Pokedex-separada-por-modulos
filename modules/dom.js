@@ -5,7 +5,7 @@ import {
   guardarPokemonEnLocalStorage,
 } from './funciones.js';
 
-const crearPaginador = (cantidadDePaginas, paginaActiva) => {
+const crearPaginador = (cantidadDePaginas, paginaActiva = 1) => {
   const $paginador = document.getElementById('paginador');
   $paginador.innerHTML = '';
   for (let i = 1; i <= cantidadDePaginas; i++) {

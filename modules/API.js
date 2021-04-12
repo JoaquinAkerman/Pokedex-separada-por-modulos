@@ -16,13 +16,7 @@ const listarPokemones = async (direccionAPI, paginaActiva = 1) => {
   try {
     const respuestaDeApi = await fetch(direccionAPI);
     const respuestaApiEnJson = await respuestaDeApi.json();
-    crearPaginador(
-      calcularCantidadPaginas(respuestaApiEnJson.count, 20),
-      paginaActiva
-    );
-    armarBotonesPokemones(respuestaApiEnJson.results);
-    botonAnteriorYSiguiente(respuestaApiEnJson);
-    mostrarCantidadDePokemones(respuestaApiEnJson.count);
+    return respuestaApiEnJson;
   } catch (error) {
     return console.error(
       'falló cargar la lista de pokemones, intente nuevamente',
