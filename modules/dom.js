@@ -1,4 +1,5 @@
-import { obtenerPropiedadesPokemon, listarPokemones } from './API.js';
+import { cambiarPagina } from '../index.js';
+import { obtenerPropiedadesPokemon } from './API.js';
 import {
   mostrarTipos,
   mostrarHabilidades,
@@ -118,7 +119,7 @@ const botonAnteriorYSiguiente = (respuestaJSON) => {
       Number(document.querySelector('.active').firstChild.innerText) - 1;
     document.querySelector('#paginador').innerHTML = '';
     document.querySelector('#botonera-pokemon').innerHTML = '';
-    listarPokemones(respuestaJSON.previous, nuevaPaginaActiva);
+    cambiarPagina(respuestaJSON.previous, nuevaPaginaActiva);
   };
   if (respuestaJSON.next === null) {
     botonSiguiente.classList = 'oculto';
@@ -130,7 +131,7 @@ const botonAnteriorYSiguiente = (respuestaJSON) => {
       Number(document.querySelector('.active').firstChild.innerText) + 1;
     document.querySelector('#paginador').innerHTML = '';
     document.querySelector('#botonera-pokemon').innerHTML = '';
-    listarPokemones(respuestaJSON.next, nuevaPaginaActiva);
+    cambiarPagina(respuestaJSON.next, nuevaPaginaActiva);
 
     document.querySelector('#boton-anterior').classList =
       'float-left btn btn-success';
@@ -140,7 +141,7 @@ const botonAnteriorYSiguiente = (respuestaJSON) => {
 const manejarBotonesPaginador = (numeroDeLaPagina) => {
   let offsetSegunPagina = (numeroDeLaPagina - 1) * 20;
   let direccionApiSegunPagina = `https://pokeapi.co/api/v2/pokemon?offset=${offsetSegunPagina}&limit=20`;
-  listarPokemones(direccionApiSegunPagina, numeroDeLaPagina);
+  cambiarPagina(direccionApiSegunPagina, numeroDeLaPagina);
 };
 
 const mostrarYOcultarCargando = () => {
