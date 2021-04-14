@@ -1,5 +1,3 @@
-import { listarPokemones } from './API.js';
-
 const calcularCantidadPaginas = (totalDePokemones, pokemonesEnPagina) => {
   return Math.ceil(totalDePokemones / pokemonesEnPagina);
 };
@@ -23,7 +21,16 @@ const guardarPokemonEnLocalStorage = (pokemonEnJson) => {
   localStorage.setItem(pokemonEnJson.forms[0].name, pokemonEnString);
 };
 
+const guardarPokemonesDePaginaEnLocalStorage = (
+  listadoPokemonesEnJson,
+  numeroDePagina
+) => {
+  let listadoEnString = JSON.stringify(listadoPokemonesEnJson);
+  localStorage.setItem(numeroDePagina, listadoEnString);
+};
+
 export {
+  guardarPokemonesDePaginaEnLocalStorage,
   guardarPokemonEnLocalStorage,
   calcularCantidadPaginas,
   mostrarTipos,
