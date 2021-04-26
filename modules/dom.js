@@ -22,6 +22,8 @@ const crearPaginador = (cantidadDePaginas, paginaActiva = 1) => {
     });
 
     if (i == paginaActiva) {
+      a.id = 'pagina-activa';
+      a.value = i;
       pagina.classList.add('active');
       mostrarPaginaActual(paginaActiva);
     }

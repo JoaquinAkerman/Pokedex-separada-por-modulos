@@ -1,0 +1,23 @@
+{
+  "name": "pokedex-separada-por-modulos",
+  "version": "1.0.0",
+  "description": "Pokedex separada por modulos con paginador",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "cypress:open": "cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joaquinluis/Pokedex-separada-por-modulos.git"
+  },
+  "author": "joaquin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joaquinluis/Pokedex-separada-por-modulos/issues"
+  },
+  "homepage": "https://github.com/joaquinluis/Pokedex-separada-por-modulos#readme",
+  "devDependencies": {
+    "cypress": "^7.1.0"
+  }
+}
