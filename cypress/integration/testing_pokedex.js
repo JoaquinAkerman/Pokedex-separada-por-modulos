@@ -1,15 +1,10 @@
 /// <reference types="Cypress" />
 
-/*
-describe('My First Test', () => {
-  it('Does not do much!', () => {
-    expect(true).to.equal(true);
-  });
-});
-*/
+import { pagina_1 } from '../fixtures/pagina_1.json';
 
 describe('Visita pokedex y clickea bulbasaur', () => {
   it('carga la página y click en bulbasaur', () => {
+    cy.intercept('https://pokeapi.co/api/v2/pokemon', pagina_1);
     cy.visit('http://localhost:8001/');
     cy.get('#bulbasaur').click();
     cy.get('#nombre').should('have.text', 'Nombre: bulbasaur');
@@ -23,7 +18,6 @@ describe('Hace click en el boton siguiente, chequea que se carguen 20 pokemones 
   });
   it('Controla que el número de pagina en el paginador y en el encabezado sean correctos', () => {
     cy.get('#pagina-activa').should('contain.text', '2');
-    ///console.log(document.querySelector('#pagina-actual'));
     cy.get('#pagina-actual').should('contain.text', 'Página 2');
   });
 });
