@@ -16,6 +16,7 @@ const crearPaginador = (cantidadDePaginas, paginaActiva = 1) => {
     a.classList.add('page-link');
     a.href = Number(i);
     a.innerText = i.toString();
+    a.id = i;
     a.addEventListener('click', (event) => {
       event.preventDefault();
       manejarBotonesPaginador(i);
