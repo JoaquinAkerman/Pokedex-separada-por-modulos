@@ -1,11 +1,11 @@
-import { direccionAPI, listarPokemones } from '../modules/API/API.js';
-import { calcularCantidadPaginas } from '../modules/funciones/funciones.js';
+import { direccionAPI, listarPokemones } from './modules/API/API.js';
+import { calcularCantidadPaginas } from './modules/funciones/funciones.js';
 import {
   crearPaginador,
   armarBotonesPokemones,
   botonAnteriorYSiguiente,
   mostrarCantidadDePokemones,
-} from '../modules/dom/dom.js';
+} from './modules/dom/dom.js';
 
 const inicializar = async () => {
   const listadoPokemones = await listarPokemones(direccionAPI);

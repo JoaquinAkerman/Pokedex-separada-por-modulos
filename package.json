@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "test:dev" :"jest --watch",
+  "clear_jest": "jest --clearCache"
   },
   "repository": {
     "type": "git",

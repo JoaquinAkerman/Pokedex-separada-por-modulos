@@ -1,5 +1,5 @@
 /// <reference types="Jest" />
-import { listarPokemones, obtenerPropiedadesPokemon } from '../API.js';
+import { listarPokemones, obtenerPropiedadesPokemon } from '../API';
 
 describe('Prueba listar pokemones con un string vacío', () => {
   it('deberia devolver un alerta de error', () => {
