@@ -1,7 +1,10 @@
 'use strict';
 
-import { mostrarYOcultarCargando, mostrarPokemonSeleccionado } from './dom.js';
-import { guardarPokemonesDePaginaEnLocalStorage } from './funciones.js';
+import {
+  mostrarYOcultarCargando,
+  mostrarPokemonSeleccionado,
+} from '../dom/dom.js';
+import { guardarPokemonesDePaginaEnLocalStorage } from '../funciones/funciones.js';
 
 const direccionAPI = 'https://pokeapi.co/api/v2/pokemon';
 
@@ -9,7 +12,6 @@ const listarPokemones = async (direccionAPI, paginaActiva = 1) => {
   try {
     const listadoEnLocalStorage = localStorage.getItem(paginaActiva);
     if (listadoEnLocalStorage === null) {
-      console.log('se busco pagina desde api');
       const respuestaDeApi = await fetch(direccionAPI);
       const respuestaApiEnJson = await respuestaDeApi.json();
       guardarPokemonesDePaginaEnLocalStorage(respuestaApiEnJson, paginaActiva);
@@ -18,7 +20,7 @@ const listarPokemones = async (direccionAPI, paginaActiva = 1) => {
       return JSON.parse(listadoEnLocalStorage);
     }
   } catch (error) {
-    return console.error(
+    console.error(
       'falló cargar la lista de pokemones, intente nuevamente',
       error
     );
@@ -33,7 +35,8 @@ const obtenerPropiedadesPokemon = async (urlDelPokemon, nombreDelPokemon) => {
       if (pokemonEnLocalStorage === null) {
         console.log('se busco pokemon desde api');
         const respuestaDeApiInfoPokemon = await fetch(urlDelPokemon);
-        const respuestaDeApiInfoPokemonEnJson = await respuestaDeApiInfoPokemon.json();
+        const respuestaDeApiInfoPokemonEnJson =
+          await respuestaDeApiInfoPokemon.json();
         mostrarPokemonSeleccionado(respuestaDeApiInfoPokemonEnJson);
         mostrarYOcultarCargando();
       } else {

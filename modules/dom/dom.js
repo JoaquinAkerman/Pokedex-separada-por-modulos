@@ -1,10 +1,10 @@
-import { cambiarPagina } from '../index.js';
-import { obtenerPropiedadesPokemon } from './API.js';
+import { cambiarPagina } from '../../index.js';
+import { obtenerPropiedadesPokemon } from '../API/API.js';
 import {
   mostrarTipos,
   mostrarHabilidades,
   guardarPokemonEnLocalStorage,
-} from './funciones.js';
+} from '../funciones/funciones.js';
 
 const crearPaginador = (cantidadDePaginas, paginaActiva = 1) => {
   const $paginador = document.getElementById('paginador');
@@ -94,8 +94,9 @@ const armarBotonesPokemones = (infoPokemon) => {
     option.classList = 'botones btn btn-dark ';
     $listaDePokemones.append(option);
     option.addEventListener('click', () => {
-      const nombrePokemonSeleccionado = document.querySelector(`#${option.id}`)
-        .value;
+      const nombrePokemonSeleccionado = document.querySelector(
+        `#${option.id}`
+      ).value;
       const urlPokemonSeleccionado = document
         .querySelector(`#${nombrePokemonSeleccionado}`)
         .getAttribute('data-url');

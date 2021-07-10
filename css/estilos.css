@@ -1,5 +1,5 @@
 #pokedex{
-    float: center;
+	position: relative;
     border-style: solid;
 	border-color: red;
 	border-top-width: 50px;
@@ -7,10 +7,11 @@
 	border-bottom-width: 10px;
 	border-left-width: 1em;
 	background-color: blanchedalmond;
-	margin: 0 auto
-	    
-}
+	margin: 0 auto;
 
+	
+}
+ 
 #informacion-del-pokemon{
 	border-style: solid;
 	border-color: black;
@@ -20,14 +21,10 @@
 	border-left-width: 1em;
 }
 #botonera-pokemon{
-background-color:brown;}
+	position: relative;
+	background-color:brown;
+	float: left;}
 
-
-
-#botonera-pokemon{
-	
-    float: left;
-    display: inline-flex;}
 
 #imagen-pokemon{background-color: black;}
 
