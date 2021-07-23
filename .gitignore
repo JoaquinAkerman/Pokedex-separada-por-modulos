@@ -25,3 +25,4 @@ cypress/integration/examples/window.spec.js
 cypress/plugins/index.js
 cypress/support/commands.js
 cypress/support/index.js
+cypress/videos/testing_pokedex.js.mp4

@@ -1,4 +1,6 @@
 /// <reference types="Jest" />
+
+
 import { listarPokemones, obtenerPropiedadesPokemon } from '../API';
 
 describe('Prueba listar pokemones con un string vacío', () => {
