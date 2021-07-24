@@ -6,6 +6,7 @@ beforeEach(() => {
 });
 
 test('prueba el paginador', () => {
+  document.body.innerHTML = '<div id="paginador"></div>';
   global.fetch.mockImplementationOnce(
     () =>
       new Promise((resolve) => {
@@ -17,6 +18,7 @@ test('prueba el paginador', () => {
   );
 
   crearPaginador(1);
+
   expect(a).toBe(1);
 
   /// acá puedo escribir las pruebas, está mockeada la promesa
