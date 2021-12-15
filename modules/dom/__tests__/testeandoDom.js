@@ -6,6 +6,8 @@ beforeEach(() => {
 });
 
 test("prueba el paginador", () => {
+  document.body.innerHTML =
+    '<h2 id="pagina-actual">Cargando...</h2><h2 id="cantidad-de-pokemones">Cargando...</h2>';
   global.fetch.mockImplementationOnce(
     () =>
       new Promise((resolve) => {
@@ -15,8 +17,6 @@ test("prueba el paginador", () => {
         resolve({ json: () => jsonPromise });
       })
   );
-  paginaActual = '<h2 id="pagina-actual">Cargando...</h2>';
-  $cantidadDePokemones = '<h2 id="cantidad-de-pokemones">Cargando...</h2>';
 
   crearPaginador(1, 1);
 
