@@ -15,8 +15,8 @@ test("prueba el paginador", () => {
         resolve({ json: () => jsonPromise });
       })
   );
-  const paginaActual = document.querySelector("#pagina-actual");
-  const $cantidadDePokemones = document.querySelector("#cantidad-de-pokemones");
+  paginaActual = '<h2 id="pagina-actual">Cargando...</h2>';
+  $cantidadDePokemones = '<h2 id="cantidad-de-pokemones">Cargando...</h2>';
 
   crearPaginador(1, 1);
 
