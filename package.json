@@ -4,6 +4,7 @@
   "description": "Pokedex separada por modulos con paginador",
   "main": "index.js",
   "scripts": {
+    "test-dev": "jest --watch",
     "test": "jest",
     "cypress:open": "cypress open",
     "clear_jest": "jest --clearCache"

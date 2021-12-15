@@ -6,9 +6,6 @@ beforeEach(() => {
 });
 
 test("prueba el paginador", () => {
-  <h2 id="pagina-actual">Cargando...</h2>;
-
-  <h2 id="cantidad-de-pokemones">Cargando...</h2>;
   global.fetch.mockImplementationOnce(
     () =>
       new Promise((resolve) => {
