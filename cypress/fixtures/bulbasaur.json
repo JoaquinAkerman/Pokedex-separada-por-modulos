@@ -19,7 +19,10 @@
   ],
   "base_experience": 64,
   "forms": [
-    { "name": "bulbasaur_interceptado", "url": "https://pokeapi.co/api/v2/pokemon-form/1/" }
+    {
+      "name": "bulbasaur",
+      "url": "https://pokeapi.co/api/v2/pokemon-form/1/"
+    }
   ],
   "game_indices": [
     {
@@ -10187,7 +10190,7 @@
       ]
     }
   ],
-  "name": "bulbasaur",
+  "name": "bulbasaurInterceptado",
   "order": 1,
   "past_types": [],
   "species": {

@@ -1,14 +1,7 @@
-"use strict";
+import { mostrarPokemonSeleccionado } from '../dom/dom.js';
+import { guardarPokemonesDePaginaEnLocalStorage } from '../funciones/funciones.js';
 
-import {
-  mostrarYOcultarCargando,
-  mostrarPokemonSeleccionado,
-} from "../dom/dom.js";
-import { guardarPokemonesDePaginaEnLocalStorage } from "../funciones/funciones.js";
-
-const direccionAPI = "https://pokeapi.co/api/v2/pokemon";
-
-//'https://pokeapi.co/api/v2/pokemon'
+const direccionAPI = 'https://pokeapi.co/api/v2/pokemon';
 
 const listarPokemones = async (direccionAPI, paginaActiva = 1) => {
   try {
@@ -23,8 +16,8 @@ const listarPokemones = async (direccionAPI, paginaActiva = 1) => {
     }
   } catch (error) {
     console.error(
-      "falló cargar la lista de pokemones, intente nuevamente",
-      error
+      'falló cargar la lista de pokemones, intente nuevamente',
+      error,
     );
   }
 };
@@ -32,22 +25,19 @@ const listarPokemones = async (direccionAPI, paginaActiva = 1) => {
 const obtenerPropiedadesPokemon = async (urlDelPokemon, nombreDelPokemon) => {
   {
     try {
-      mostrarYOcultarCargando();
       const pokemonEnLocalStorage = localStorage.getItem(nombreDelPokemon);
       if (pokemonEnLocalStorage === null) {
         const respuestaDeApiInfoPokemon = await fetch(urlDelPokemon);
         const respuestaDeApiInfoPokemonEnJson =
           await respuestaDeApiInfoPokemon.json();
         mostrarPokemonSeleccionado(respuestaDeApiInfoPokemonEnJson);
-        mostrarYOcultarCargando();
       } else {
         mostrarPokemonSeleccionado(JSON.parse(pokemonEnLocalStorage));
-        mostrarYOcultarCargando();
       }
     } catch (error) {
       return console.error(
-        "falló cargar el pokemon seleccionado, intente nuevamente",
-        error
+        'falló cargar el pokemon seleccionado, intente nuevamente',
+        error,
       );
     }
   }
