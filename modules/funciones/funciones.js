@@ -16,6 +16,16 @@ const mostrarHabilidades = (arrayDeHabilidades, $selector) => {
   });
 };
 
+const mostrarFoto = (foto1, foto2) => {
+  if (foto1 === null && foto2 !== null) {
+    return foto2;
+  } else if (foto1 !== null) {
+    return foto1;
+  } else {
+    return '/imagenes/faltaImagen.png';
+  }
+};
+
 const guardarPokemonEnLocalStorage = (pokemonEnJson) => {
   let pokemonEnString = JSON.stringify(pokemonEnJson);
   localStorage.setItem(pokemonEnJson.forms[0].name, pokemonEnString);
@@ -23,7 +33,7 @@ const guardarPokemonEnLocalStorage = (pokemonEnJson) => {
 
 const guardarPokemonesDePaginaEnLocalStorage = (
   listadoPokemonesEnJson,
-  numeroDePagina
+  numeroDePagina,
 ) => {
   let listadoEnString = JSON.stringify(listadoPokemonesEnJson);
   localStorage.setItem(numeroDePagina, listadoEnString);
@@ -35,4 +45,5 @@ export {
   calcularCantidadPaginas,
   mostrarTipos,
   mostrarHabilidades,
+  mostrarFoto,
 };

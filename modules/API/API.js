@@ -1,14 +1,12 @@
-'use strict';
-
-import { mostrarYOcultarCargando, mostrarPokemonSeleccionado } from './dom.js';
-import { guardarPokemonesDePaginaEnLocalStorage } from './funciones.js';
+import { mostrarPokemonSeleccionado } from '../dom/dom.js';
+import { guardarPokemonesDePaginaEnLocalStorage } from '../funciones/funciones.js';
 
 const direccionAPI = 'https://pokeapi.co/api/v2/pokemon';
 
 const listarPokemones = async (direccionAPI, paginaActiva = 1) => {
   try {
     const listadoEnLocalStorage = localStorage.getItem(paginaActiva);
-    if (listadoEnLocalStorage == undefined) {
+    if (listadoEnLocalStorage === null) {
       const respuestaDeApi = await fetch(direccionAPI);
       const respuestaApiEnJson = await respuestaDeApi.json();
       guardarPokemonesDePaginaEnLocalStorage(respuestaApiEnJson, paginaActiva);
@@ -17,9 +15,9 @@ const listarPokemones = async (direccionAPI, paginaActiva = 1) => {
       return JSON.parse(listadoEnLocalStorage);
     }
   } catch (error) {
-    return console.error(
+    console.error(
       'falló cargar la lista de pokemones, intente nuevamente',
-      error
+      error,
     );
   }
 };
@@ -27,21 +25,19 @@ const listarPokemones = async (direccionAPI, paginaActiva = 1) => {
 const obtenerPropiedadesPokemon = async (urlDelPokemon, nombreDelPokemon) => {
   {
     try {
-      mostrarYOcultarCargando();
       const pokemonEnLocalStorage = localStorage.getItem(nombreDelPokemon);
-      if (pokemonEnLocalStorage == undefined) {
+      if (pokemonEnLocalStorage === null) {
         const respuestaDeApiInfoPokemon = await fetch(urlDelPokemon);
-        const respuestaDeApiInfoPokemonEnJson = await respuestaDeApiInfoPokemon.json();
+        const respuestaDeApiInfoPokemonEnJson =
+          await respuestaDeApiInfoPokemon.json();
         mostrarPokemonSeleccionado(respuestaDeApiInfoPokemonEnJson);
-        mostrarYOcultarCargando();
       } else {
         mostrarPokemonSeleccionado(JSON.parse(pokemonEnLocalStorage));
-        mostrarYOcultarCargando();
       }
     } catch (error) {
       return console.error(
         'falló cargar el pokemon seleccionado, intente nuevamente',
-        error
+        error,
       );
     }
   }

@@ -1,0 +1,79 @@
+{
+  "count": 1118,
+  "next": null,
+  "previous": "https://pokeapi.co/api/v2/pokemon?offset=1080&limit=20",
+  "results": [
+    {
+      "name": "corviknight-gmax",
+      "url": "https://pokeapi.co/api/v2/pokemon/10203/"
+    },
+    {
+      "name": "orbeetle-gmax",
+      "url": "https://pokeapi.co/api/v2/pokemon/10204/"
+    },
+    {
+      "name": "drednaw-gmax",
+      "url": "https://pokeapi.co/api/v2/pokemon/10205/"
+    },
+    {
+      "name": "coalossal-gmax",
+      "url": "https://pokeapi.co/api/v2/pokemon/10206/"
+    },
+    {
+      "name": "flapple-gmax",
+      "url": "https://pokeapi.co/api/v2/pokemon/10207/"
+    },
+    {
+      "name": "appletun-gmax",
+      "url": "https://pokeapi.co/api/v2/pokemon/10208/"
+    },
+    {
+      "name": "sandaconda-gmax",
+      "url": "https://pokeapi.co/api/v2/pokemon/10209/"
+    },
+    {
+      "name": "toxtricity-amped-gmax",
+      "url": "https://pokeapi.co/api/v2/pokemon/10210/"
+    },
+    {
+      "name": "centiskorch-gmax",
+      "url": "https://pokeapi.co/api/v2/pokemon/10211/"
+    },
+    {
+      "name": "hatterene-gmax",
+      "url": "https://pokeapi.co/api/v2/pokemon/10212/"
+    },
+    {
+      "name": "grimmsnarl-gmax",
+      "url": "https://pokeapi.co/api/v2/pokemon/10213/"
+    },
+    {
+      "name": "alcremie-gmax",
+      "url": "https://pokeapi.co/api/v2/pokemon/10214/"
+    },
+    {
+      "name": "copperajah-gmax",
+      "url": "https://pokeapi.co/api/v2/pokemon/10215/"
+    },
+    {
+      "name": "duraludon-gmax",
+      "url": "https://pokeapi.co/api/v2/pokemon/10216/"
+    },
+    {
+      "name": "eternatus-eternamax",
+      "url": "https://pokeapi.co/api/v2/pokemon/10217/"
+    },
+    {
+      "name": "urshifu-single-strike-gmax",
+      "url": "https://pokeapi.co/api/v2/pokemon/10218/"
+    },
+    {
+      "name": "urshifu-rapid-strike-gmax",
+      "url": "https://pokeapi.co/api/v2/pokemon/10219/"
+    },
+    {
+      "name": "toxtricity-low-key-gmax",
+      "url": "https://pokeapi.co/api/v2/pokemon/10220/"
+    }
+  ]
+}

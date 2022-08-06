@@ -1,0 +1,48 @@
+{
+  "name": "pokedex-separada-por-modulos",
+  "version": "1.0.0",
+  "description": "Pokedex separada por modulos con paginador",
+  "main": "index.js",
+  "scripts": {
+    "test-dev": "jest --watchAll",
+    "cypress:open": "cypress open",
+    "clear_jest": "jest --clearCache"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joaquinluis/Pokedex-separada-por-modulos.git"
+  },
+  "author": "joaquin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joaquinluis/Pokedex-separada-por-modulos/issues"
+  },
+  "homepage": "https://github.com/joaquinluis/Pokedex-separada-por-modulos#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
+    "@babel/preset-react": "^7.16.0",
+    "@types/jest": "^26.0.23",
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^27.3.1",
+    "babel-loader": "^8.2.5",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "cypress": "^10.4.0",
+    "env": "0.0.2",
+    "jest": "^26.6.3",
+    "npm-run-all": "^4.1.5",
+    "prest": "0.0.0"
+  },
+  "dependencies": {
+    "package.json": "^2.0.1"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./pathToYour/setupTests.js"
+    ]
+  }
+}
