@@ -1,12 +1,24 @@
-import { cambiarPagina } from '../../index.js';
-import { obtenerPropiedadesPokemon } from '../API/API.js';
-import {
-  mostrarTipos,
-  mostrarHabilidades,
-  guardarPokemonEnLocalStorage,
-  mostrarFoto,
-} from '../funciones/funciones.js';
-import Pokemon from '../clases/pokemon.js';
+import { buscarPagina } from '../servicios/servicios.js';
+import { Pokemon } from '../clases/pokemon.js';
+
+function inicializar() {
+  const paginaInicial = 'https://pokeapi.co/api/v2/pokemon';
+  armarPagina(paginaInicial);
+}
+function armarPagina(direccionDePagina) {
+  buscarPagina(direccionDePagina).then(function (resultado) {
+    const cantidadDePaginas = Math.ceil(resultado.count / 20);
+    armarBotonesPokemones(resultado.results);
+    crearPaginador(cantidadDePaginas);
+  });
+}
+
+function mostrarDetallesPoekmon(urlDePokemon) {
+  const detalles = buscarPagina(urlDePokemon);
+  detalles.then(function (detallesObtenidos) {
+    armarTarjetaDePokemon(detallesObtenidos);
+  });
+}
 
 const crearPaginador = (cantidadDePaginas, paginaActiva = 1) => {
   const $paginador = document.getElementById('paginador');
@@ -39,35 +51,6 @@ const mostrarPaginaActual = (numeroDePagina) => {
     '#pagina-actual',
   ).innerHTML = `Página ${numeroDePagina}`;
 };
-const mostrarPokemonSeleccionado = (infoJsonDelPokemonSeleccionado) => {
-  guardarPokemonEnLocalStorage(infoJsonDelPokemonSeleccionado);
-  const pokemonSeleccionado = new Pokemon(
-    infoJsonDelPokemonSeleccionado.id,
-    infoJsonDelPokemonSeleccionado.name,
-    infoJsonDelPokemonSeleccionado.sprites.other.dream_world.front_default,
-    infoJsonDelPokemonSeleccionado.sprites.front_default,
-    infoJsonDelPokemonSeleccionado.abilities,
-    infoJsonDelPokemonSeleccionado.types,
-    infoJsonDelPokemonSeleccionado.weight,
-    infoJsonDelPokemonSeleccionado.height,
-  );
-  const { id, nombre, foto1, foto2, habilidades, tipos, peso, altura } =
-    pokemonSeleccionado;
-  const $nombrePokemon = document.querySelector('#nombre');
-  const $IDPokemon = document.querySelector('#ID');
-  let $tipoPokemon = document.querySelector('#tipo');
-  const $pesoPokemon = document.querySelector('#peso');
-  const $alturaPokemon = document.querySelector('#altura');
-  let $habilidadesPokemon = document.querySelector('#habilidades');
-  const $imagenPokemon = document.querySelector('#imagen-pokemon');
-  mostrarTipos(tipos, $tipoPokemon);
-  $imagenPokemon.src = mostrarFoto(foto1, foto2);
-  $nombrePokemon.innerText = `Nombre: ${nombre}`;
-  $IDPokemon.innerText = `ID: ${id}`;
-  $pesoPokemon.innerText = `Peso: ${peso}`;
-  $alturaPokemon.innerText = `Altura: ${altura}`;
-  mostrarHabilidades(habilidades, $habilidadesPokemon);
-};
 
 const armarBotonesPokemones = (infoPokemon) => {
   const $listaDePokemones = document.querySelector('#botonera-pokemon');
@@ -91,13 +74,39 @@ const armarBotonesPokemones = (infoPokemon) => {
         .querySelector(`#${nombrePokemonSeleccionado}`)
         .getAttribute('data-url');
       mostrarYOcultarCargando();
-      obtenerPropiedadesPokemon(
-        urlPokemonSeleccionado,
-        nombrePokemonSeleccionado,
-      );
+      mostrarDetallesPoekmon(urlPokemonSeleccionado, nombrePokemonSeleccionado);
       mostrarYOcultarCargando();
     });
   });
+};
+
+const armarTarjetaDePokemon = (infoPokemonSeleccionado) => {
+  const pokemonSeleccionado = new Pokemon(
+    infoPokemonSeleccionado.id,
+    infoPokemonSeleccionado.name,
+    infoPokemonSeleccionado.sprites.other.dream_world.front_default,
+    infoPokemonSeleccionado.sprites.front_default,
+    infoPokemonSeleccionado.abilities,
+    infoPokemonSeleccionado.types,
+    infoPokemonSeleccionado.weight,
+    infoPokemonSeleccionado.height,
+  );
+  const { id, nombre, foto1, foto2, habilidades, tipos, peso, altura } =
+    pokemonSeleccionado;
+  const $nombrePokemon = document.querySelector('#nombre');
+  const $IDPokemon = document.querySelector('#ID');
+  let $tipoPokemon = document.querySelector('#tipo');
+  const $pesoPokemon = document.querySelector('#peso');
+  const $alturaPokemon = document.querySelector('#altura');
+  let $habilidadesPokemon = document.querySelector('#habilidades');
+  const $imagenPokemon = document.querySelector('#imagen-pokemon');
+  mostrarTipos(tipos, $tipoPokemon);
+  $imagenPokemon.src = mostrarFoto(foto1, foto2);
+  $nombrePokemon.innerText = `Nombre: ${nombre}`;
+  $IDPokemon.innerText = `ID: ${id}`;
+  $pesoPokemon.innerText = `Peso: ${peso}`;
+  $alturaPokemon.innerText = `Altura: ${altura}`;
+  mostrarHabilidades(habilidades, $habilidadesPokemon);
 };
 
 const botonAnteriorYSiguiente = (respuestaJSON) => {
@@ -133,6 +142,7 @@ const botonAnteriorYSiguiente = (respuestaJSON) => {
       'float-left btn btn-success';
   };
 };
+
 const manejarBotonesPaginador = (numeroDeLaPagina) => {
   let offsetSegunPagina = (numeroDeLaPagina - 1) * 20;
   let direccionApiSegunPagina = `https://pokeapi.co/api/v2/pokemon?offset=${offsetSegunPagina}&limit=20`;
@@ -147,10 +157,32 @@ const mostrarCantidadDePokemones = (cantidadDePokemones) => {
   $cantidadDePokemones.innerHTML = `Hay ${cantidadDePokemones} Pokemones, selecciona uno para ver la info`;
 };
 
+const mostrarTipos = (tipos, $selector) => {
+  $selector.innerText = `Tipo:`;
+  tipos.forEach((tipos) => {
+    $selector.append(` "${tipos.type.name}" `);
+  });
+};
+
+const mostrarHabilidades = (habilidades, $selector) => {
+  $selector.innerText = 'Habilidades :';
+  habilidades.forEach((habilidades) => {
+    $selector.append(` "${habilidades.ability.name}" `);
+  });
+};
+
+const mostrarFoto = (foto1, foto2) => {
+  if (foto1 === null && foto2 !== null) {
+    return foto2;
+  } else if (foto1 !== null) {
+    return foto1;
+  } else {
+    return '/imagenes/faltaImagen.png';
+  }
+};
 export {
-  mostrarCantidadDePokemones,
-  crearPaginador,
+  inicializar,
+  armarTarjetaDePokemon,
   armarBotonesPokemones,
-  mostrarPokemonSeleccionado,
-  botonAnteriorYSiguiente,
+  crearPaginador,
 };

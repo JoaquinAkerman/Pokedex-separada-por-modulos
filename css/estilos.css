@@ -1,62 +1,54 @@
-#pokedex{
-	position: relative;
-    border-style: solid;
-	border-color: brown;
-	border-top-width: 50px;
-	border-right-width: 1em;
-	border-bottom-width: 10px;
-	border-left-width: 1em;
-	background-color: rgb(0, 0, 0);
-	margin: 0 auto;
-	border-radius: 5px;
-
-	
-}
- 
-#informacion-del-pokemon{
-	border-style: solid;
-	border-color: black;
-	border-top-width: 1em;
-	border-right-width: 1em;
-	border-bottom-width: 1em;
-	border-left-width: 1em;
-}
-#botonera-pokemon{
-	position: relative;
-	background-color:brown;
-	float: left;
-	width: 250px;
-	
+#pokedex {
+  position: relative;
+  border-style: solid;
+  border-color: brown;
+  border-top-width: 50px;
+  border-right-width: 1em;
+  border-bottom-width: 10px;
+  border-left-width: 1em;
+  background-color: rgb(0, 0, 0);
+  margin: 0 auto;
+  border-radius: 5px;
 }
 
-#contenido-pokedex{
-	padding-left: 70px;
+#informacion-del-pokemon {
+  border-style: solid;
+  border-color: black;
+  border-top-width: 1em;
+  border-right-width: 1em;
+  border-bottom-width: 1em;
+  border-left-width: 1em;
+}
+#botonera-pokemon {
+  position: relative;
+  background-color: brown;
+  float: left;
+  width: 250px;
 }
 
-#imagen-pokemon{background-color: black;
+#contenido-pokedex {
+  padding-left: 70px;
 }
 
-#informacion-del-pokemon{background-color: burlywood;}
+#imagen-pokemon {
+  background-color: black;
+}
 
-.oculto{display: none;}
+#informacion-del-pokemon {
+  background-color: burlywood;
+}
 
-#imagen-de-fondo{background-image: 
-    linear-gradient(
-      rgba(0, 0, 0, 0.5),
-      rgba(0, 0, 0, 0.5)
-    ),
+.oculto {
+  display: none;
+}
+
+#imagen-de-fondo {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url(../imagenes/fondo-pokemon.jpg);
-height: auto;
-width: auto;
+  height: auto;
+  width: auto;
 }
 
-#geneal{
-	max-width: 1000px;
+#cabecera {
+  padding: 70px;
 }
-#cabecera{
-	padding: 70px;
-}
-
-
-
-
