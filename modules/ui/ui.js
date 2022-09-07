@@ -5,11 +5,13 @@ function inicializar() {
   const paginaInicial = 'https://pokeapi.co/api/v2/pokemon';
   armarPagina(paginaInicial);
 }
-function armarPagina(direccionDePagina) {
+function armarPagina(direccionDePagina, paginaActiva = 1) {
   buscarPagina(direccionDePagina).then(function (resultado) {
     const cantidadDePaginas = Math.ceil(resultado.count / 20);
     armarBotonesPokemones(resultado.results);
-    crearPaginador(cantidadDePaginas);
+    crearPaginador(cantidadDePaginas, paginaActiva);
+    botonAnteriorYSiguiente(resultado);
+    mostrarCantidadDePokemones(resultado.count);
   });
 }
 
@@ -36,7 +38,7 @@ const crearPaginador = (cantidadDePaginas, paginaActiva = 1) => {
       manejarBotonesPaginador(i);
     });
 
-    if (i == paginaActiva) {
+    if (i === paginaActiva) {
       a.id = 'pagina-activa';
       a.value = i;
       pagina.classList.add('active');
@@ -62,7 +64,6 @@ const armarBotonesPokemones = (infoPokemon) => {
     option.value = name;
     option.innerText = name;
     option.id = name;
-    option.style = 'margin: 10px';
     option.dataset.url = url;
     option.classList = 'botones btn btn-dark ';
     $listaDePokemones.append(option);
@@ -95,18 +96,18 @@ const armarTarjetaDePokemon = (infoPokemonSeleccionado) => {
     pokemonSeleccionado;
   const $nombrePokemon = document.querySelector('#nombre');
   const $IDPokemon = document.querySelector('#ID');
-  let $tipoPokemon = document.querySelector('#tipo');
+  const $tipoPokemon = document.querySelector('#tipo');
   const $pesoPokemon = document.querySelector('#peso');
   const $alturaPokemon = document.querySelector('#altura');
-  let $habilidadesPokemon = document.querySelector('#habilidades');
+  const $habilidadesPokemon = document.querySelector('#habilidades');
   const $imagenPokemon = document.querySelector('#imagen-pokemon');
-  mostrarTipos(tipos, $tipoPokemon);
   $imagenPokemon.src = mostrarFoto(foto1, foto2);
   $nombrePokemon.innerText = `Nombre: ${nombre}`;
   $IDPokemon.innerText = `ID: ${id}`;
   $pesoPokemon.innerText = `Peso: ${peso}`;
   $alturaPokemon.innerText = `Altura: ${altura}`;
-  mostrarHabilidades(habilidades, $habilidadesPokemon);
+  mostrarTipos(tipos, $tipoPokemon);
+  mostrarSpecs(habilidades, $habilidadesPokemon);
 };
 
 const botonAnteriorYSiguiente = (respuestaJSON) => {
@@ -124,7 +125,7 @@ const botonAnteriorYSiguiente = (respuestaJSON) => {
       Number(document.querySelector('.active').firstChild.innerText) - 1;
     document.querySelector('#paginador').innerHTML = '';
     document.querySelector('#botonera-pokemon').innerHTML = '';
-    cambiarPagina(respuestaJSON.previous, nuevaPaginaActiva);
+    armarPagina(respuestaJSON.previous, nuevaPaginaActiva);
   };
   if (respuestaJSON.next === null) {
     botonSiguiente.classList = 'oculto';
@@ -136,17 +137,19 @@ const botonAnteriorYSiguiente = (respuestaJSON) => {
       Number(document.querySelector('.active').firstChild.innerText) + 1;
     document.querySelector('#paginador').innerHTML = '';
     document.querySelector('#botonera-pokemon').innerHTML = '';
-    cambiarPagina(respuestaJSON.next, nuevaPaginaActiva);
+    armarPagina(respuestaJSON.next, nuevaPaginaActiva);
 
     document.querySelector('#boton-anterior').classList =
       'float-left btn btn-success';
   };
 };
 
-const manejarBotonesPaginador = (numeroDeLaPagina) => {
-  let offsetSegunPagina = (numeroDeLaPagina - 1) * 20;
-  let direccionApiSegunPagina = `https://pokeapi.co/api/v2/pokemon?offset=${offsetSegunPagina}&limit=20`;
-  cambiarPagina(direccionApiSegunPagina, numeroDeLaPagina);
+const manejarBotonesPaginador = (numeroDeLaPaginaSeleccionada) => {
+  const pokemonesPorPagina = 20;
+  const offsetSegunPagina =
+    (numeroDeLaPaginaSeleccionada - 1) * pokemonesPorPagina;
+  const direccionApiSegunPagina = `https://pokeapi.co/api/v2/pokemon?offset=${offsetSegunPagina}&limit=${pokemonesPorPagina}`;
+  armarPagina(direccionApiSegunPagina, numeroDeLaPaginaSeleccionada);
 };
 const mostrarYOcultarCargando = () => {
   const avisoCargando = document.querySelector('#aviso-cargando');
@@ -164,10 +167,10 @@ const mostrarTipos = (tipos, $selector) => {
   });
 };
 
-const mostrarHabilidades = (habilidades, $selector) => {
-  $selector.innerText = 'Habilidades :';
-  habilidades.forEach((habilidades) => {
-    $selector.append(` "${habilidades.ability.name}" `);
+const mostrarSpecs = (specs, $selector) => {
+  $selector.innerText = 'Habilidades: ';
+  specs.forEach((specs) => {
+    $selector.append(`"${specs.ability.name}" `);
   });
 };
 
@@ -180,9 +183,4 @@ const mostrarFoto = (foto1, foto2) => {
     return '/imagenes/faltaImagen.png';
   }
 };
-export {
-  inicializar,
-  armarTarjetaDePokemon,
-  armarBotonesPokemones,
-  crearPaginador,
-};
+export { inicializar };

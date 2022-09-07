@@ -5,13 +5,10 @@ const buscarPagina = async (direccionDePagina) => {
   try {
     const paginaEnLocalStorage = localStorage.getItem(direccionDePagina);
     if (paginaEnLocalStorage === null) {
-      console.log('se hizo fetch a la api');
-
       const respuestaDeApi = await fetchPagina(direccionDePagina);
       guardarPaginaEnLocalStorage(respuestaDeApi, direccionDePagina);
       return respuestaDeApi;
     } else {
-      console.log('se busco de localStorage');
       return JSON.parse(paginaEnLocalStorage);
     }
   } catch (error) {

@@ -1,4 +1,5 @@
 /// <reference types="Cypress" />
+import bulbasaur from '../fixtures/bulbasaur.json';
 
 describe('Visita pokedex y clickea bulbasaur', () => {
   it('carga la página, click en bulbasaur y controla que el boton anterior esté oculto, y que el nombre sea bulbasaurInterceptado para confirmar el stub  del request', () => {
@@ -24,7 +25,8 @@ describe('Visita pokedex y clickea bulbasaur', () => {
     cy.get('#altura').should('have.text', 'Altura: 7');
     cy.get('#habilidades').should(
       'have.text',
-      'Habilidades : "overgrow"  "chlorophyll" ',
+      //'Habilidades: "overgrow"  "chlorophyll" ',
+      `Habilidades: "${bulbasaur.abilities[0].ability.name}" "${bulbasaur.abilities[1].ability.name}" `,
     );
     cy.get('#boton-anterior').should('have.class', 'oculto');
   });
