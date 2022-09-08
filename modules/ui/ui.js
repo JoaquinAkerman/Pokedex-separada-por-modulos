@@ -1,87 +1,44 @@
-import { buscarPagina } from '../servicios/servicios.js';
+/* eslint-disable no-plusplus */
+/* eslint-disable object-curly-newline */
+/* eslint-disable operator-linebreak */
+/* eslint-disable no-param-reassign */
+/* eslint-disable import/extensions */
+import buscarPagina from '../servicios/servicios.js';
 import { Pokemon } from '../clases/pokemon.js';
 
-function inicializar() {
-  const paginaInicial = 'https://pokeapi.co/api/v2/pokemon';
-  armarPagina(paginaInicial);
-}
-function armarPagina(direccionDePagina, paginaActiva = 1) {
-  buscarPagina(direccionDePagina).then(function (resultado) {
-    const cantidadDePaginas = Math.ceil(resultado.count / 20);
-    armarBotonesPokemones(resultado.results);
-    crearPaginador(cantidadDePaginas, paginaActiva);
-    botonAnteriorYSiguiente(resultado);
-    mostrarCantidadDePokemones(resultado.count);
+const mostrarTipos = (tipos, $selector) => {
+  $selector.innerText = 'Tipo:';
+  tipos.forEach((tiposPokemon) => {
+    $selector.append(` "${tiposPokemon.type.name}" `);
   });
-}
+};
 
-function mostrarDetallesPoekmon(urlDePokemon) {
-  const detalles = buscarPagina(urlDePokemon);
-  detalles.then(function (detallesObtenidos) {
-    armarTarjetaDePokemon(detallesObtenidos);
+const mostrarSpecs = (specs, $selector) => {
+  $selector.innerText = 'Habilidades: ';
+  specs.forEach((specsPokemon) => {
+    $selector.append(`"${specsPokemon.ability.name}" `);
   });
-}
+};
 
-const crearPaginador = (cantidadDePaginas, paginaActiva = 1) => {
-  const $paginador = document.getElementById('paginador');
-  $paginador.innerHTML = '';
-  for (let i = 1; i <= cantidadDePaginas; i++) {
-    const pagina = document.createElement('li');
-    pagina.classList.add('page-item');
-    const a = document.createElement('a');
-    a.classList.add('page-link');
-    a.href = Number(i);
-    a.innerText = i.toString();
-    a.id = i;
-    a.addEventListener('click', (event) => {
-      event.preventDefault();
-      manejarBotonesPaginador(i);
-    });
-
-    if (i === paginaActiva) {
-      a.id = 'pagina-activa';
-      a.value = i;
-      pagina.classList.add('active');
-      mostrarPaginaActual(paginaActiva);
-    }
-    pagina.appendChild(a);
-    $paginador.appendChild(pagina);
+function mostrarFoto(foto1, foto2) {
+  let fotoDePokemon = foto1;
+  if (foto1 === null) {
+    fotoDePokemon = foto2;
   }
-};
-const mostrarPaginaActual = (numeroDePagina) => {
-  document.querySelector(
-    '#pagina-actual',
-  ).innerHTML = `Página ${numeroDePagina}`;
-};
+  if (fotoDePokemon === null) {
+    fotoDePokemon = '/imagenes/faltaImagen.png';
+  }
 
-const armarBotonesPokemones = (infoPokemon) => {
-  const $listaDePokemones = document.querySelector('#botonera-pokemon');
-  $listaDePokemones.innerHTML = '';
+  return fotoDePokemon;
+}
 
-  infoPokemon.forEach(($pokemon) => {
-    const { name, url } = $pokemon;
-    const option = document.createElement('button');
-    option.value = name;
-    option.innerText = name;
-    option.id = name;
-    option.dataset.url = url;
-    option.classList = 'botones btn btn-dark ';
-    $listaDePokemones.append(option);
-    option.addEventListener('click', () => {
-      const nombrePokemonSeleccionado = document.querySelector(
-        `#${option.id}`,
-      ).value;
-      const urlPokemonSeleccionado = document
-        .querySelector(`#${nombrePokemonSeleccionado}`)
-        .getAttribute('data-url');
-      mostrarYOcultarCargando();
-      mostrarDetallesPoekmon(urlPokemonSeleccionado, nombrePokemonSeleccionado);
-      mostrarYOcultarCargando();
-    });
-  });
+const mostrarYOcultarCargando = () => {
+  const avisoCargando = document.querySelector('#aviso-cargando');
+  avisoCargando.classList.toggle('oculto');
 };
-
 const armarTarjetaDePokemon = (infoPokemonSeleccionado) => {
+  mostrarYOcultarCargando();
+
   const pokemonSeleccionado = new Pokemon(
     infoPokemonSeleccionado.id,
     infoPokemonSeleccionado.name,
@@ -108,6 +65,38 @@ const armarTarjetaDePokemon = (infoPokemonSeleccionado) => {
   $alturaPokemon.innerText = `Altura: ${altura}`;
   mostrarTipos(tipos, $tipoPokemon);
   mostrarSpecs(habilidades, $habilidadesPokemon);
+  mostrarYOcultarCargando();
+};
+function mostrarDetallesPoekmon(urlDePokemon) {
+  const detalles = buscarPagina(urlDePokemon);
+  detalles.then((detallesObtenidos) => {
+    armarTarjetaDePokemon(detallesObtenidos);
+  });
+}
+
+const armarBotonesPokemones = (infoPokemon) => {
+  const $listaDePokemones = document.querySelector('#botonera-pokemon');
+  $listaDePokemones.innerHTML = '';
+
+  infoPokemon.forEach(($pokemon) => {
+    const { name, url } = $pokemon;
+    const option = document.createElement('button');
+    option.value = name;
+    option.innerText = name;
+    option.id = name;
+    option.dataset.url = url;
+    option.classList = 'botones btn btn-dark ';
+    $listaDePokemones.append(option);
+    option.addEventListener('click', () => {
+      const nombrePokemonSeleccionado = document.querySelector(
+        `#${option.id}`,
+      ).value;
+      const urlPokemonSeleccionado = document
+        .querySelector(`#${nombrePokemonSeleccionado}`)
+        .getAttribute('data-url');
+      mostrarDetallesPoekmon(urlPokemonSeleccionado, nombrePokemonSeleccionado);
+    });
+  });
 };
 
 const botonAnteriorYSiguiente = (respuestaJSON) => {
@@ -120,7 +109,7 @@ const botonAnteriorYSiguiente = (respuestaJSON) => {
     botonAnterior.classList = 'float-left btn btn-success';
   }
 
-  botonAnterior.onclick = function (e) {
+  botonAnterior.onclick = () => {
     const nuevaPaginaActiva =
       Number(document.querySelector('.active').firstChild.innerText) - 1;
     document.querySelector('#paginador').innerHTML = '';
@@ -132,7 +121,7 @@ const botonAnteriorYSiguiente = (respuestaJSON) => {
   } else {
     botonSiguiente.classList = 'float-right btn btn-success';
   }
-  botonSiguiente.onclick = function (e) {
+  botonSiguiente.onclick = () => {
     const nuevaPaginaActiva =
       Number(document.querySelector('.active').firstChild.innerText) + 1;
     document.querySelector('#paginador').innerHTML = '';
@@ -144,6 +133,20 @@ const botonAnteriorYSiguiente = (respuestaJSON) => {
   };
 };
 
+const mostrarCantidadDePokemones = (cantidadDePokemones) => {
+  const $cantidadDePokemones = document.querySelector('#cantidad-de-pokemones');
+  $cantidadDePokemones.innerHTML = `Hay ${cantidadDePokemones} Pokemones, selecciona uno para ver la info`;
+};
+
+function armarPagina(direccionDePagina, paginaActiva = 1) {
+  buscarPagina(direccionDePagina).then((resultado) => {
+    const cantidadDePaginas = Math.ceil(resultado.count / 20);
+    armarBotonesPokemones(resultado.results);
+    crearPaginador(cantidadDePaginas, paginaActiva);
+    botonAnteriorYSiguiente(resultado);
+    mostrarCantidadDePokemones(resultado.count);
+  });
+}
 const manejarBotonesPaginador = (numeroDeLaPaginaSeleccionada) => {
   const pokemonesPorPagina = 20;
   const offsetSegunPagina =
@@ -151,36 +154,41 @@ const manejarBotonesPaginador = (numeroDeLaPaginaSeleccionada) => {
   const direccionApiSegunPagina = `https://pokeapi.co/api/v2/pokemon?offset=${offsetSegunPagina}&limit=${pokemonesPorPagina}`;
   armarPagina(direccionApiSegunPagina, numeroDeLaPaginaSeleccionada);
 };
-const mostrarYOcultarCargando = () => {
-  const avisoCargando = document.querySelector('#aviso-cargando');
-  avisoCargando.classList.toggle('oculto');
+const mostrarPaginaActual = (numeroDePagina) => {
+  document.querySelector(
+    '#pagina-actual',
+  ).innerHTML = `Página ${numeroDePagina}`;
 };
-const mostrarCantidadDePokemones = (cantidadDePokemones) => {
-  const $cantidadDePokemones = document.querySelector('#cantidad-de-pokemones');
-  $cantidadDePokemones.innerHTML = `Hay ${cantidadDePokemones} Pokemones, selecciona uno para ver la info`;
-};
+const crearPaginador = (cantidadDePaginas, paginaActiva = 1) => {
+  const $paginador = document.getElementById('paginador');
+  $paginador.innerHTML = '';
+  for (let i = 1; i <= cantidadDePaginas; i++) {
+    const pagina = document.createElement('li');
+    pagina.classList.add('page-item');
+    const a = document.createElement('a');
+    a.classList.add('page-link');
+    a.href = Number(i);
+    a.innerText = i.toString();
+    a.id = i;
+    a.addEventListener('click', (event) => {
+      event.preventDefault();
+      manejarBotonesPaginador(i);
+    });
 
-const mostrarTipos = (tipos, $selector) => {
-  $selector.innerText = `Tipo:`;
-  tipos.forEach((tipos) => {
-    $selector.append(` "${tipos.type.name}" `);
-  });
-};
-
-const mostrarSpecs = (specs, $selector) => {
-  $selector.innerText = 'Habilidades: ';
-  specs.forEach((specs) => {
-    $selector.append(`"${specs.ability.name}" `);
-  });
-};
-
-const mostrarFoto = (foto1, foto2) => {
-  if (foto1 === null && foto2 !== null) {
-    return foto2;
-  } else if (foto1 !== null) {
-    return foto1;
-  } else {
-    return '/imagenes/faltaImagen.png';
+    if (i === paginaActiva) {
+      a.id = 'pagina-activa';
+      a.value = i;
+      pagina.classList.add('active');
+      mostrarPaginaActual(paginaActiva);
+    }
+    pagina.appendChild(a);
+    $paginador.appendChild(pagina);
   }
 };
+
+export default function inicializar() {
+  const paginaInicial = 'https://pokeapi.co/api/v2/pokemon';
+  armarPagina(paginaInicial);
+}
+
 export { inicializar };

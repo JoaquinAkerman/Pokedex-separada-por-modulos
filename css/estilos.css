@@ -11,6 +11,10 @@
   border-radius: 5px;
 }
 
+#aviso-cargando {
+  background-color: aliceblue;
+}
+
 #informacion-del-pokemon {
   border-style: solid;
   border-color: black;

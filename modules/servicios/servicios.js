@@ -1,7 +1,8 @@
-import { fetchPagina } from '../api/api.js';
+/* eslint-disable import/extensions */
+import fetchPagina from '../api/api.js';
 import { guardarPaginaEnLocalStorage } from '../storage/storage.js';
 
-const buscarPagina = async (direccionDePagina) => {
+export default async function buscarPagina(direccionDePagina) {
   try {
     const paginaEnLocalStorage = localStorage.getItem(direccionDePagina);
     if (paginaEnLocalStorage === null) {
@@ -14,6 +15,4 @@ const buscarPagina = async (direccionDePagina) => {
   } catch (error) {
     console.error('falló cargar la pagina, intente nuevamente', error);
   }
-};
-
-export { buscarPagina };
+}
