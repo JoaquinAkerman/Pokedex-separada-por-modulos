@@ -1,5 +1,4 @@
-/* eslint-disable no-console */
-export default async function defetchPagina(direccionDeLapagina) {
+export default async function fetchPagina(direccionDeLapagina) {
   try {
     const respuestaDeApi = await fetch(direccionDeLapagina);
     const respuestaApiEnJson = await respuestaDeApi.json();

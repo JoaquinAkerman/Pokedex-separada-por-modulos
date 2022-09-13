@@ -1,23 +1,20 @@
-/* eslint-disable no-plusplus */
-/* eslint-disable object-curly-newline */
-/* eslint-disable operator-linebreak */
-/* eslint-disable no-param-reassign */
-/* eslint-disable import/extensions */
 import buscarPagina from '../servicios/servicios.js';
 import { Pokemon } from '../clases/pokemon.js';
 
-const mostrarTipos = (tipos, $selector) => {
-  $selector.innerText = 'Tipo:';
+const mostrarTipos = (tipos) => {
+  const detallesTipos = [];
   tipos.forEach((tiposPokemon) => {
-    $selector.append(` "${tiposPokemon.type.name}" `);
+    detallesTipos.push(` "${tiposPokemon.type.name}"`);
   });
+  return `Tipos:${detallesTipos}`;
 };
 
-const mostrarSpecs = (specs, $selector) => {
-  $selector.innerText = 'Habilidades: ';
-  specs.forEach((specsPokemon) => {
-    $selector.append(`"${specsPokemon.ability.name}" `);
+const mostrarHabilidades = (habilidades) => {
+  const detallesHabilidades = [];
+  habilidades.forEach((habilidadesPokemon) => {
+    detallesHabilidades.push(` "${habilidadesPokemon.ability.name}"`);
   });
+  return `Habilidades:${detallesHabilidades}`;
 };
 
 function mostrarFoto(foto1, foto2) {
@@ -38,7 +35,6 @@ const mostrarYOcultarCargando = () => {
 };
 const armarTarjetaDePokemon = (infoPokemonSeleccionado) => {
   mostrarYOcultarCargando();
-
   const pokemonSeleccionado = new Pokemon(
     infoPokemonSeleccionado.id,
     infoPokemonSeleccionado.name,
@@ -51,6 +47,7 @@ const armarTarjetaDePokemon = (infoPokemonSeleccionado) => {
   );
   const { id, nombre, foto1, foto2, habilidades, tipos, peso, altura } =
     pokemonSeleccionado;
+
   const $nombrePokemon = document.querySelector('#nombre');
   const $IDPokemon = document.querySelector('#ID');
   const $tipoPokemon = document.querySelector('#tipo');
@@ -63,8 +60,8 @@ const armarTarjetaDePokemon = (infoPokemonSeleccionado) => {
   $IDPokemon.innerText = `ID: ${id}`;
   $pesoPokemon.innerText = `Peso: ${peso}`;
   $alturaPokemon.innerText = `Altura: ${altura}`;
-  mostrarTipos(tipos, $tipoPokemon);
-  mostrarSpecs(habilidades, $habilidadesPokemon);
+  $tipoPokemon.innerText = mostrarTipos(tipos);
+  $habilidadesPokemon.innerText = mostrarHabilidades(habilidades);
   mostrarYOcultarCargando();
 };
 function mostrarDetallesPoekmon(urlDePokemon) {
@@ -162,7 +159,7 @@ const mostrarPaginaActual = (numeroDePagina) => {
 const crearPaginador = (cantidadDePaginas, paginaActiva = 1) => {
   const $paginador = document.getElementById('paginador');
   $paginador.innerHTML = '';
-  for (let i = 1; i <= cantidadDePaginas; i++) {
+  for (let i = 1; i <= cantidadDePaginas; i += 1) {
     const pagina = document.createElement('li');
     pagina.classList.add('page-item');
     const a = document.createElement('a');
