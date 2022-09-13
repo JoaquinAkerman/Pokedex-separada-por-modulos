@@ -1,4 +1,6 @@
+/* eslint-disable no-undef */
 /// <reference types="Cypress" />
+import bulbasaur from '../fixtures/bulbasaur.json';
 
 describe('Visita pokedex y clickea bulbasaur', () => {
   it('carga la página, click en bulbasaur y controla que el boton anterior esté oculto, y que el nombre sea bulbasaurInterceptado para confirmar el stub  del request', () => {
@@ -19,12 +21,12 @@ describe('Visita pokedex y clickea bulbasaur', () => {
       );
     cy.get('#nombre').should('have.text', 'Nombre: bulbasaurInterceptado');
     cy.get('#ID').should('have.text', 'ID: 1');
-    cy.get('#tipo').should('have.text', 'Tipo: "grass"  "poison" ');
+    cy.get('#tipo').should('have.text', 'Tipos: "grass", "poison"');
     cy.get('#peso').should('have.text', 'Peso: 69');
     cy.get('#altura').should('have.text', 'Altura: 7');
     cy.get('#habilidades').should(
       'have.text',
-      'Habilidades : "overgrow"  "chlorophyll" ',
+      `Habilidades: "${bulbasaur.abilities[0].ability.name}", "${bulbasaur.abilities[1].ability.name}"`,
     );
     cy.get('#boton-anterior').should('have.class', 'oculto');
   });
@@ -67,7 +69,6 @@ describe('Hace click en el botón anterior y se asegura que al estar en la pági
   it('Controla que el número de pagina en el paginador y en el encabezado sean correctos', () => {
     cy.get('#pagina-activa').should('contain.text', '1');
     cy.get('#pagina-actual').should('contain.text', 'Página 1');
-    cy.get;
   });
 });
 
