@@ -1,11 +1,12 @@
 import fetchPagina from '../api/api.js';
-import guardarPaginaEnLocalStorage from '../storage/storage.js';
+import {
+  guardarPaginaEnLocalStorage,
+  buscarEnLocalStorage,
+} from '../storage/storage.js';
 
 export default async function buscarPagina(direccionDePagina) {
-  console.log(direccionDePagina);
-
   try {
-    const paginaEnLocalStorage = localStorage.getItem(direccionDePagina);
+    const paginaEnLocalStorage = buscarEnLocalStorage(direccionDePagina);
     if (paginaEnLocalStorage === null) {
       const respuestaDeApi = await fetchPagina(direccionDePagina);
       guardarPaginaEnLocalStorage(respuestaDeApi, direccionDePagina);
