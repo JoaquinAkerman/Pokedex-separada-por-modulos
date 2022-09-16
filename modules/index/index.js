@@ -6,8 +6,8 @@ import {
   mostrarCantidadDePokemones,
 } from '../ui/ui.js';
 
-function armarPagina(direccionDePagina, paginaActiva = 1) {
-  buscarPagina(direccionDePagina).then((resultado) => {
+function armarPagina(paginaActiva) {
+  buscarPagina(paginaActiva).then((resultado) => {
     const cantidadDePaginas = Math.ceil(resultado.count / 20);
     armarBotonesPokemones(resultado.results);
     crearPaginador(cantidadDePaginas, paginaActiva);
@@ -16,7 +16,6 @@ function armarPagina(direccionDePagina, paginaActiva = 1) {
   });
 }
 function inicializar() {
-  const paginaInicial = 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=20';
-  armarPagina(paginaInicial);
+  armarPagina(1);
 }
 export { inicializar, armarPagina };
