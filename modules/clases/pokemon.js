@@ -1,4 +1,4 @@
-class Pokemon {
+export default class Pokemon {
   /**
    * @param {Number} id
    * @param {String} nombre
@@ -17,6 +17,7 @@ class Pokemon {
     foto2,
     habilidades = [],
     tipos = [],
+    movimientos = [],
     peso,
     altura,
   ) {
@@ -26,6 +27,7 @@ class Pokemon {
     this.foto2 = foto2;
     this.habilidades = habilidades;
     this.tipos = tipos;
+    this.movimientos = movimientos;
     this.peso = peso;
     this.altura = altura;
   }

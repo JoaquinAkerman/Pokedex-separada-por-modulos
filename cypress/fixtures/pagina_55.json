@@ -1,0 +1,27 @@
+{
+  "count": 1118,
+  "next": "https://pokeapi.co/api/v2/pokemon?offset=1100&limit=20",
+  "previous": "https://pokeapi.co/api/v2/pokemon?offset=1060&limit=20",
+  "results": [
+    { "name": "darumaka-galar", "url": "https://pokeapi.co/api/v2/pokemon/10176/" },
+    { "name": "darmanitan-galar-standard", "url": "https://pokeapi.co/api/v2/pokemon/10177/" },
+    { "name": "darmanitan-galar-zen", "url": "https://pokeapi.co/api/v2/pokemon/10178/" },
+    { "name": "yamask-galar", "url": "https://pokeapi.co/api/v2/pokemon/10179/" },
+    { "name": "stunfisk-galar", "url": "https://pokeapi.co/api/v2/pokemon/10180/" },
+    { "name": "zygarde-10", "url": "https://pokeapi.co/api/v2/pokemon/10181/" },
+    { "name": "cramorant-gulping", "url": "https://pokeapi.co/api/v2/pokemon/10182/" },
+    { "name": "cramorant-gorging", "url": "https://pokeapi.co/api/v2/pokemon/10183/" },
+    { "name": "toxtricity-low-key", "url": "https://pokeapi.co/api/v2/pokemon/10184/" },
+    { "name": "eiscue-noice", "url": "https://pokeapi.co/api/v2/pokemon/10185/" },
+    { "name": "indeedee-female", "url": "https://pokeapi.co/api/v2/pokemon/10186/" },
+    { "name": "morpeko-hangry", "url": "https://pokeapi.co/api/v2/pokemon/10187/" },
+    { "name": "zacian-crowned", "url": "https://pokeapi.co/api/v2/pokemon/10188/" },
+    { "name": "zamazenta-crowned", "url": "https://pokeapi.co/api/v2/pokemon/10189/" },
+    { "name": "eternatus-eternamax", "url": "https://pokeapi.co/api/v2/pokemon/10190/" },
+    { "name": "urshifu-rapid-strike", "url": "https://pokeapi.co/api/v2/pokemon/10191/" },
+    { "name": "zarude-dada", "url": "https://pokeapi.co/api/v2/pokemon/10192/" },
+    { "name": "calyrex-ice", "url": "https://pokeapi.co/api/v2/pokemon/10193/" },
+    { "name": "calyrex-shadow", "url": "https://pokeapi.co/api/v2/pokemon/10194/" },
+    { "name": "venusaur-gmax", "url": "https://pokeapi.co/api/v2/pokemon/10195/" }
+  ]
+}

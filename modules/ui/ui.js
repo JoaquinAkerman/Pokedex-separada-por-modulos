@@ -1,5 +1,16 @@
+/* eslint-disable operator-linebreak */
+/* eslint-disable object-curly-newline */
 import buscarPagina from '../servicios/servicios.js';
 import { Pokemon } from '../clases/pokemon.js';
+import { armarPagina } from '../index/index.js';
+
+function mostarMovimientos(movimientos) {
+  const detallesMovimientos = [];
+  movimientos.forEach((movimientosPokemon) => {
+    detallesMovimientos.push(` "${movimientosPokemon.move.name}"`);
+  });
+  return `Movimientos:${detallesMovimientos}`;
+}
 
 const mostrarTipos = (tipos) => {
   const detallesTipos = [];
@@ -42,12 +53,12 @@ const armarTarjetaDePokemon = (infoPokemonSeleccionado) => {
     infoPokemonSeleccionado.sprites.front_default,
     infoPokemonSeleccionado.abilities,
     infoPokemonSeleccionado.types,
+    infoPokemonSeleccionado.moves,
     infoPokemonSeleccionado.weight,
     infoPokemonSeleccionado.height,
   );
-  const { id, nombre, foto1, foto2, habilidades, tipos, peso, altura } =
+  const { id, nombre, foto1, foto2, habilidades, tipos, movimientos, peso, altura } =
     pokemonSeleccionado;
-
   const $nombrePokemon = document.querySelector('#nombre');
   const $IDPokemon = document.querySelector('#ID');
   const $tipoPokemon = document.querySelector('#tipo');
@@ -55,6 +66,7 @@ const armarTarjetaDePokemon = (infoPokemonSeleccionado) => {
   const $alturaPokemon = document.querySelector('#altura');
   const $habilidadesPokemon = document.querySelector('#habilidades');
   const $imagenPokemon = document.querySelector('#imagen-pokemon');
+  const $movimientosPokemon = document.querySelector('#movimientos');
   $imagenPokemon.src = mostrarFoto(foto1, foto2);
   $nombrePokemon.innerText = `Nombre: ${nombre}`;
   $IDPokemon.innerText = `ID: ${id}`;
@@ -62,8 +74,10 @@ const armarTarjetaDePokemon = (infoPokemonSeleccionado) => {
   $alturaPokemon.innerText = `Altura: ${altura}`;
   $tipoPokemon.innerText = mostrarTipos(tipos);
   $habilidadesPokemon.innerText = mostrarHabilidades(habilidades);
+  $movimientosPokemon.innerText = mostarMovimientos(movimientos);
   mostrarYOcultarCargando();
 };
+
 function mostrarDetallesPoekmon(urlDePokemon) {
   const detalles = buscarPagina(urlDePokemon);
   detalles.then((detallesObtenidos) => {
@@ -85,9 +99,7 @@ const armarBotonesPokemones = (infoPokemon) => {
     option.classList = 'botones btn btn-dark ';
     $listaDePokemones.append(option);
     option.addEventListener('click', () => {
-      const nombrePokemonSeleccionado = document.querySelector(
-        `#${option.id}`,
-      ).value;
+      const nombrePokemonSeleccionado = document.querySelector(`#${option.id}`).value;
       const urlPokemonSeleccionado = document
         .querySelector(`#${nombrePokemonSeleccionado}`)
         .getAttribute('data-url');
@@ -107,11 +119,10 @@ const botonAnteriorYSiguiente = (respuestaJSON) => {
   }
 
   botonAnterior.onclick = () => {
-    const nuevaPaginaActiva =
-      Number(document.querySelector('.active').firstChild.innerText) - 1;
+    const paginaSeleccionada = Number(document.querySelector('.active').firstChild.innerText) - 1;
     document.querySelector('#paginador').innerHTML = '';
     document.querySelector('#botonera-pokemon').innerHTML = '';
-    armarPagina(respuestaJSON.previous, nuevaPaginaActiva);
+    armarPagina(paginaSeleccionada);
   };
   if (respuestaJSON.next === null) {
     botonSiguiente.classList = 'oculto';
@@ -119,14 +130,12 @@ const botonAnteriorYSiguiente = (respuestaJSON) => {
     botonSiguiente.classList = 'float-right btn btn-success';
   }
   botonSiguiente.onclick = () => {
-    const nuevaPaginaActiva =
-      Number(document.querySelector('.active').firstChild.innerText) + 1;
+    const paginaSeleccionada = Number(document.querySelector('.active').firstChild.innerText) + 1;
     document.querySelector('#paginador').innerHTML = '';
     document.querySelector('#botonera-pokemon').innerHTML = '';
-    armarPagina(respuestaJSON.next, nuevaPaginaActiva);
+    armarPagina(paginaSeleccionada);
 
-    document.querySelector('#boton-anterior').classList =
-      'float-left btn btn-success';
+    document.querySelector('#boton-anterior').classList = 'float-left btn btn-success';
   };
 };
 
@@ -135,27 +144,13 @@ const mostrarCantidadDePokemones = (cantidadDePokemones) => {
   $cantidadDePokemones.innerHTML = `Hay ${cantidadDePokemones} Pokemones, selecciona uno para ver la info`;
 };
 
-function armarPagina(direccionDePagina, paginaActiva = 1) {
-  buscarPagina(direccionDePagina).then((resultado) => {
-    const cantidadDePaginas = Math.ceil(resultado.count / 20);
-    armarBotonesPokemones(resultado.results);
-    crearPaginador(cantidadDePaginas, paginaActiva);
-    botonAnteriorYSiguiente(resultado);
-    mostrarCantidadDePokemones(resultado.count);
-  });
-}
-const manejarBotonesPaginador = (numeroDeLaPaginaSeleccionada) => {
-  const pokemonesPorPagina = 20;
-  const offsetSegunPagina =
-    (numeroDeLaPaginaSeleccionada - 1) * pokemonesPorPagina;
-  const direccionApiSegunPagina = `https://pokeapi.co/api/v2/pokemon?offset=${offsetSegunPagina}&limit=${pokemonesPorPagina}`;
-  armarPagina(direccionApiSegunPagina, numeroDeLaPaginaSeleccionada);
+const manejarBotonesPaginador = (numeroPagina) => {
+  armarPagina(numeroPagina);
 };
 const mostrarPaginaActual = (numeroDePagina) => {
-  document.querySelector(
-    '#pagina-actual',
-  ).innerHTML = `Página ${numeroDePagina}`;
+  document.querySelector('#pagina-actual').innerHTML = `Página ${numeroDePagina}`;
 };
+
 const crearPaginador = (cantidadDePaginas, paginaActiva = 1) => {
   const $paginador = document.getElementById('paginador');
   $paginador.innerHTML = '';
@@ -171,7 +166,6 @@ const crearPaginador = (cantidadDePaginas, paginaActiva = 1) => {
       event.preventDefault();
       manejarBotonesPaginador(i);
     });
-
     if (i === paginaActiva) {
       a.id = 'pagina-activa';
       a.value = i;
@@ -183,9 +177,9 @@ const crearPaginador = (cantidadDePaginas, paginaActiva = 1) => {
   }
 };
 
-export default function inicializar() {
-  const paginaInicial = 'https://pokeapi.co/api/v2/pokemon';
-  armarPagina(paginaInicial);
-}
-
-export { inicializar };
+export {
+  armarBotonesPokemones,
+  botonAnteriorYSiguiente,
+  mostrarCantidadDePokemones,
+  crearPaginador,
+};

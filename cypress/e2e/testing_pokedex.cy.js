@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 /// <reference types="Cypress" />
 import bulbasaur from '../fixtures/bulbasaur.json';
+import darumakaGalar from '../fixtures/darumaka_galar.json';
 
 describe('Visita pokedex y clickea bulbasaur', () => {
   it('carga la página, click en bulbasaur y controla que el boton anterior esté oculto, y que el nombre sea bulbasaurInterceptado para confirmar el stub  del request', () => {
@@ -86,6 +87,36 @@ describe('prueba botones del paginador, y que el botón siguiente se oculte cuan
     cy.get('.botones').should('have.length', 20);
     cy.get('#56').click();
     cy.get('#pagina-activa').should('contain.text', '56');
+    cy.get('#pagina-actual').should('contain.text', 'Página 56');
+    cy.get('.botones').should('have.length', 18);
+    cy.get('#boton-siguiente').should('have.class', 'oculto');
+  });
+});
+
+describe('prueba botones anterior y siguiente, y un pokemon', () => {
+  it('prueba los botones y la data del pokemon seleccionado', () => {
+    cy.intercept('https://pokeapi.co/api/v2/pokemon?offset=1100&limit=20', {
+      fixture: 'pagina_56.json',
+    });
+    cy.intercept('https://pokeapi.co/api/v2/pokemon?offset=1080&limit=20', {
+      fixture: 'pagina_55.json',
+    });
+    cy.intercept('https://pokeapi.co/api/v2/pokemon/10176/', {
+      fixture: 'darumaka_galar.json',
+    });
+    cy.get('#boton-anterior').click();
+    cy.get('#pagina-activa').should('contain.text', '55');
+    cy.get('#pagina-actual').should('contain.text', 'Página 55');
+    cy.get('.botones').should('have.length', 20);
+    cy.get('#darumaka-galar').click();
+    cy.get('#nombre').should('have.text', `Nombre: ${darumakaGalar.name}`);
+    cy.get('#ID').should('have.text', `ID: ${darumakaGalar.id}`);
+    cy.get('#tipo').should('have.text', 'Tipos: "ice"');
+    cy.get('#peso').should('have.text', `Peso: ${darumakaGalar.weight}`);
+    cy.get('#altura').should('have.text', `Altura: ${darumakaGalar.height}`);
+    cy.get('#boton-siguiente').click();
+    cy.get('#boton-anterior').click();
+    cy.get('#boton-siguiente').click();
     cy.get('#pagina-actual').should('contain.text', 'Página 56');
     cy.get('.botones').should('have.length', 18);
     cy.get('#boton-siguiente').should('have.class', 'oculto');
