@@ -9,6 +9,9 @@ function mostarMovimientos(movimientos) {
   movimientos.forEach((movimientosPokemon) => {
     detallesMovimientos.push(` "${movimientosPokemon.move.name}"`);
   });
+  if (detallesMovimientos.length === 0) {
+    return 'Movimientos: No hay info';
+  }
   return `Movimientos:${detallesMovimientos}`;
 }
 
@@ -17,6 +20,9 @@ const mostrarTipos = (tipos) => {
   tipos.forEach((tiposPokemon) => {
     detallesTipos.push(` "${tiposPokemon.type.name}"`);
   });
+  if (detallesTipos.length === 0) {
+    return 'Tipos: No hay info';
+  }
   return `Tipos:${detallesTipos}`;
 };
 
@@ -25,6 +31,9 @@ const mostrarHabilidades = (habilidades) => {
   habilidades.forEach((habilidadesPokemon) => {
     detallesHabilidades.push(` "${habilidadesPokemon.ability.name}"`);
   });
+  if (detallesHabilidades.length === 0) {
+    return 'Habilidades: No hay info';
+  }
   return `Habilidades:${detallesHabilidades}`;
 };
 
