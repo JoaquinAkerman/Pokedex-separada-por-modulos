@@ -7,12 +7,13 @@ async function fetchPokemon(paginaPokemon) {
     return console.error('falló cargar la pagina, intente nuevamente', error);
   }
 }
-export default async function fetchPagina(pagina) {
-  if (pagina.length > 2) {
-    return fetchPokemon(pagina);
+export default async function fetchPagina(key) {
+  const parametro = Number(key);
+  if (Number.isNaN(parametro)) {
+    return fetchPokemon(key);
   }
 
-  const offsetSegunPagina = (pagina - 1) * 20;
+  const offsetSegunPagina = (key - 1) * 20;
   const direccionApi = `https://pokeapi.co/api/v2/pokemon?offset=${offsetSegunPagina}&limit=20`;
 
   try {
