@@ -94,11 +94,11 @@ function mostrarDetallesPoekmon(urlDePokemon) {
   });
 }
 
-const armarBotonesPokemones = (infoPokemon) => {
+const armarBotonesPokemones = (infoPokemones) => {
   const $listaDePokemones = document.querySelector('#botonera-pokemon');
   $listaDePokemones.innerHTML = '';
 
-  infoPokemon.forEach(($pokemon) => {
+  infoPokemones.forEach(($pokemon) => {
     const { name, url } = $pokemon;
     const option = document.createElement('button');
     option.value = name;
@@ -107,21 +107,17 @@ const armarBotonesPokemones = (infoPokemon) => {
     option.dataset.url = url;
     option.classList = 'botones btn btn-dark ';
     $listaDePokemones.append(option);
-    option.addEventListener('click', () => {
-      const nombrePokemonSeleccionado = document.querySelector(`#${option.id}`).value;
-      const urlPokemonSeleccionado = document
-        .querySelector(`#${nombrePokemonSeleccionado}`)
-        .getAttribute('data-url');
-      mostrarDetallesPoekmon(urlPokemonSeleccionado, nombrePokemonSeleccionado);
+    option.addEventListener('click', (e) => {
+      mostrarDetallesPoekmon(e.target.dataset.url);
     });
   });
 };
 
-const botonAnteriorYSiguiente = (respuestaJSON) => {
+const configurarBotonAnteriorYSiguiente = (paginaActiva, cantidadDePaginas) => {
   const botonAnterior = document.querySelector('#boton-anterior');
   const botonSiguiente = document.querySelector('#boton-siguiente');
 
-  if (respuestaJSON.previous === null) {
+  if (paginaActiva === 1) {
     botonAnterior.classList = 'oculto';
   } else {
     botonAnterior.classList = 'float-left btn btn-success';
@@ -133,7 +129,7 @@ const botonAnteriorYSiguiente = (respuestaJSON) => {
     document.querySelector('#botonera-pokemon').innerHTML = '';
     armarPagina(paginaSeleccionada);
   };
-  if (respuestaJSON.next === null) {
+  if (paginaActiva === cantidadDePaginas) {
     botonSiguiente.classList = 'oculto';
   } else {
     botonSiguiente.classList = 'float-right btn btn-success';
@@ -160,7 +156,9 @@ const mostrarPaginaActual = (numeroDePagina) => {
   document.querySelector('#pagina-actual').innerHTML = `Página ${numeroDePagina}`;
 };
 
-const crearPaginador = (cantidadDePaginas, paginaActiva = 1) => {
+const crearPaginador = (cantidadDePaginas, cantidadPokemones, paginaActiva = 1) => {
+  mostrarCantidadDePokemones(cantidadPokemones);
+  configurarBotonAnteriorYSiguiente(paginaActiva, cantidadDePaginas);
   const $paginador = document.getElementById('paginador');
   $paginador.innerHTML = '';
   for (let i = 1; i <= cantidadDePaginas; i += 1) {
@@ -186,9 +184,4 @@ const crearPaginador = (cantidadDePaginas, paginaActiva = 1) => {
   }
 };
 
-export {
-  armarBotonesPokemones,
-  botonAnteriorYSiguiente,
-  mostrarCantidadDePokemones,
-  crearPaginador,
-};
+export { armarBotonesPokemones, mostrarCantidadDePokemones, crearPaginador };

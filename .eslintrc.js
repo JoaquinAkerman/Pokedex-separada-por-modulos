@@ -11,7 +11,6 @@ module.exports = {
   },
   rules: {
     'import/extensions': 'off',
-    'import/no-cycle': 'off',
     'no-console': 'off',
     'no-restricted-syntax': [
       'error',
