@@ -54,9 +54,7 @@ const mostrarYOcultarCargando = () => {
   avisoCargando.classList.toggle('oculto');
 };
 const armarTarjetaDePokemon = (pokemon) => {
-  /// aca tiene que llegar la entidad pokemon
   mostrarYOcultarCargando();
-
   const { id, nombre, foto1, foto2, habilidades, tipos, movimientos, peso, altura } = pokemon;
   const $nombrePokemon = document.querySelector('#nombre');
   const $IDPokemon = document.querySelector('#ID');

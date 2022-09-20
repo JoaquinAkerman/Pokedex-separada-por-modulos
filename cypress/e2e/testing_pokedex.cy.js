@@ -93,8 +93,8 @@ describe('prueba botones del paginador, y que el botón siguiente se oculte cuan
   });
 });
 
-describe('prueba botones anterior y siguiente, y un pokemon', () => {
-  it('prueba los botones y la data del pokemon seleccionado', () => {
+describe('prueba botones anterior y siguiente, un pokemon y chequea total de pokemons', () => {
+  it('prueba los botones y la data del pokemon seleccionado, y el total de pokemons', () => {
     cy.intercept('https://pokeapi.co/api/v2/pokemon?offset=1100&limit=20', {
       fixture: 'pagina_56.json',
     });
@@ -120,5 +120,9 @@ describe('prueba botones anterior y siguiente, y un pokemon', () => {
     cy.get('#pagina-actual').should('contain.text', 'Página 56');
     cy.get('.botones').should('have.length', 18);
     cy.get('#boton-siguiente').should('have.class', 'oculto');
+    cy.get('#cantidad-de-pokemones').should(
+      'contain.text',
+      'Hay 1118 Pokemones, selecciona uno para ver la info',
+    );
   });
 });
