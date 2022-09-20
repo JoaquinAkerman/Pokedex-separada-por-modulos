@@ -1,7 +1,7 @@
 /* eslint-disable operator-linebreak */
 /* eslint-disable object-curly-newline */
 import buscarPagina from '../servicios/servicios.js';
-import { Pokemon } from '../clases/pokemon.js';
+import { construirPokemon } from '../clases/pokemon.js';
 import { armarPagina } from '../index/index.js';
 
 function mostarMovimientos(movimientos) {
@@ -53,21 +53,11 @@ const mostrarYOcultarCargando = () => {
   const avisoCargando = document.querySelector('#aviso-cargando');
   avisoCargando.classList.toggle('oculto');
 };
-const armarTarjetaDePokemon = (infoPokemonSeleccionado) => {
+const armarTarjetaDePokemon = (pokemon) => {
+  /// aca tiene que llegar la entidad pokemon
   mostrarYOcultarCargando();
-  const pokemonSeleccionado = new Pokemon(
-    infoPokemonSeleccionado.id,
-    infoPokemonSeleccionado.name,
-    infoPokemonSeleccionado.sprites.other.dream_world.front_default,
-    infoPokemonSeleccionado.sprites.front_default,
-    infoPokemonSeleccionado.abilities,
-    infoPokemonSeleccionado.types,
-    infoPokemonSeleccionado.moves,
-    infoPokemonSeleccionado.weight,
-    infoPokemonSeleccionado.height,
-  );
-  const { id, nombre, foto1, foto2, habilidades, tipos, movimientos, peso, altura } =
-    pokemonSeleccionado;
+
+  const { id, nombre, foto1, foto2, habilidades, tipos, movimientos, peso, altura } = pokemon;
   const $nombrePokemon = document.querySelector('#nombre');
   const $IDPokemon = document.querySelector('#ID');
   const $tipoPokemon = document.querySelector('#tipo');
@@ -89,8 +79,9 @@ const armarTarjetaDePokemon = (infoPokemonSeleccionado) => {
 
 function mostrarDetallesPoekmon(urlDePokemon) {
   const detalles = buscarPagina(urlDePokemon);
-  detalles.then((detallesObtenidos) => {
-    armarTarjetaDePokemon(detallesObtenidos);
+  detalles.then((specsPokemon) => {
+    const pokemon = construirPokemon(specsPokemon);
+    armarTarjetaDePokemon(pokemon);
   });
 }
 
