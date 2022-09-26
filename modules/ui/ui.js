@@ -1,8 +1,6 @@
-/* eslint-disable operator-linebreak */
 /* eslint-disable object-curly-newline */
 import buscarPagina from '../servicios/servicios.js';
 import { construirPokemon } from '../clases/pokemon.js';
-import { armarPagina } from '../index/index.js';
 
 function mostarMovimientos(movimientos) {
   const detallesMovimientos = [];
@@ -54,9 +52,7 @@ const mostrarYOcultarCargando = () => {
   avisoCargando.classList.toggle('oculto');
 };
 const armarTarjetaDePokemon = (pokemon) => {
-  /// aca tiene que llegar la entidad pokemon
   mostrarYOcultarCargando();
-
   const { id, nombre, foto1, foto2, habilidades, tipos, movimientos, peso, altura } = pokemon;
   const $nombrePokemon = document.querySelector('#nombre');
   const $IDPokemon = document.querySelector('#ID');
@@ -104,7 +100,11 @@ const armarBotonesPokemones = (infoPokemones) => {
   });
 };
 
-const configurarBotonAnteriorYSiguiente = (paginaActiva, cantidadDePaginas) => {
+const configurarBotonAnteriorYSiguiente = (
+  paginaActiva,
+  cantidadDePaginas,
+  manejarClickEnPaginador = () => {},
+) => {
   const botonAnterior = document.querySelector('#boton-anterior');
   const botonSiguiente = document.querySelector('#boton-siguiente');
 
@@ -118,7 +118,7 @@ const configurarBotonAnteriorYSiguiente = (paginaActiva, cantidadDePaginas) => {
     const paginaSeleccionada = Number(document.querySelector('.active').firstChild.innerText) - 1;
     document.querySelector('#paginador').innerHTML = '';
     document.querySelector('#botonera-pokemon').innerHTML = '';
-    armarPagina(paginaSeleccionada);
+    manejarClickEnPaginador(paginaSeleccionada);
   };
   if (paginaActiva === cantidadDePaginas) {
     botonSiguiente.classList = 'oculto';
@@ -129,7 +129,7 @@ const configurarBotonAnteriorYSiguiente = (paginaActiva, cantidadDePaginas) => {
     const paginaSeleccionada = Number(document.querySelector('.active').firstChild.innerText) + 1;
     document.querySelector('#paginador').innerHTML = '';
     document.querySelector('#botonera-pokemon').innerHTML = '';
-    armarPagina(paginaSeleccionada);
+    manejarClickEnPaginador(paginaSeleccionada);
 
     document.querySelector('#boton-anterior').classList = 'float-left btn btn-success';
   };
@@ -140,16 +140,18 @@ const mostrarCantidadDePokemones = (cantidadDePokemones) => {
   $cantidadDePokemones.innerHTML = `Hay ${cantidadDePokemones} Pokemones, selecciona uno para ver la info`;
 };
 
-const manejarBotonesPaginador = (numeroPagina) => {
-  armarPagina(numeroPagina);
-};
 const mostrarPaginaActual = (numeroDePagina) => {
-  document.querySelector('#pagina-actual').innerHTML = `Página ${numeroDePagina}`;
+  document.querySelector('#pagina-actual').innerText = `Página ${numeroDePagina}`;
 };
 
-const crearPaginador = (cantidadDePaginas, cantidadPokemones, paginaActiva = 1) => {
+const crearPaginador = (
+  cantidadDePaginas,
+  cantidadPokemones,
+  paginaActiva = 1,
+  manejarClickEnPaginador = () => {},
+) => {
   mostrarCantidadDePokemones(cantidadPokemones);
-  configurarBotonAnteriorYSiguiente(paginaActiva, cantidadDePaginas);
+  configurarBotonAnteriorYSiguiente(paginaActiva, cantidadDePaginas, manejarClickEnPaginador);
   const $paginador = document.getElementById('paginador');
   $paginador.innerHTML = '';
   for (let i = 1; i <= cantidadDePaginas; i += 1) {
@@ -158,11 +160,11 @@ const crearPaginador = (cantidadDePaginas, cantidadPokemones, paginaActiva = 1) 
     const a = document.createElement('a');
     a.classList.add('page-link');
     a.href = Number(i);
-    a.innerText = i.toString();
+    a.innerText = i;
     a.id = i;
     a.addEventListener('click', (event) => {
       event.preventDefault();
-      manejarBotonesPaginador(i);
+      manejarClickEnPaginador(i);
     });
     if (i === paginaActiva) {
       a.id = 'pagina-activa';
