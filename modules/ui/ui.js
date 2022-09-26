@@ -1,4 +1,3 @@
-/* eslint-disable operator-linebreak */
 /* eslint-disable object-curly-newline */
 import buscarPagina from '../servicios/servicios.js';
 import { construirPokemon } from '../clases/pokemon.js';
@@ -142,7 +141,7 @@ const manejarBotonesPaginador = (numeroPagina) => {
   armarPagina(numeroPagina);
 };
 const mostrarPaginaActual = (numeroDePagina) => {
-  document.querySelector('#pagina-actual').innerHTML = `Página ${numeroDePagina}`;
+  document.querySelector('#pagina-actual').innerText = `Página ${numeroDePagina}`;
 };
 
 const crearPaginador = (cantidadDePaginas, cantidadPokemones, paginaActiva = 1) => {
@@ -160,6 +159,8 @@ const crearPaginador = (cantidadDePaginas, cantidadPokemones, paginaActiva = 1) 
     a.id = i;
     a.addEventListener('click', (event) => {
       event.preventDefault();
+      console.log(i);
+      console.log(event.target.id);
       manejarBotonesPaginador(i);
     });
     if (i === paginaActiva) {

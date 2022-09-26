@@ -1,12 +1,15 @@
 import buscarPagina from '../servicios/servicios.js';
-import { armarBotonesPokemones, crearPaginador } from '../ui/ui.js';
+import {
+  armarBotonesPokemones,
+  crearPaginador,
+} from '../ui/ui.js';
 
 function armarPagina(paginaActiva) {
   buscarPagina(paginaActiva).then((respuesta) => {
     const cantidadPokemones = respuesta.count;
     const cantidadDePaginas = Math.ceil(cantidadPokemones / 20);
-    armarBotonesPokemones(respuesta.results);
     crearPaginador(cantidadDePaginas, cantidadPokemones, paginaActiva);
+    armarBotonesPokemones(respuesta.results);
   });
 }
 function inicializar() {
