@@ -1,7 +1,8 @@
 module.exports = {
   verbose: true,
-  rootDir: 'modules',
-  coverageDirectory: '../coverage/',
-  testPathIgnorePatterns: [],
-  coveragePathIgnorePatterns: [],
+  roots: ['<rootDir>/modules'],
+  collectCoverage: true,
+  coverageDirectory: 'coverage',
+  testPathIgnorePatterns: ['/node_modules/', '.*fixture.js', '/fixtures/'],
+  coveragePathIgnorePatterns: ['/node_modules/', '.*fixture.js', '/fixtures/'],
 };

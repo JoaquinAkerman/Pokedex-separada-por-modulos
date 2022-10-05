@@ -9,7 +9,7 @@ async function fetchPokemon(paginaPokemon) {
 }
 export default async function fetchPagina(key) {
   const input = Number(key);
-  if (Number.isNaN(input)) { // si el input no es un numero, la funcion intenta buscar un pokemon
+  if (Number.isNaN(input)) { // si el input no es un numero, la funcion intentara buscar un pokemon
     return fetchPokemon(key);
   }
 

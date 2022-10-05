@@ -81,9 +81,10 @@ function mostrarDetallesPoekmon(urlDePokemon) {
   });
 }
 
-const armarBotonesPokemones = (infoPokemones) => {
+const armarListaPokemones = (infoPokemones) => {
+  console.log(infoPokemones);
   const $listaDePokemones = document.querySelector('#botonera-pokemon');
-  $listaDePokemones.innerHTML = '';
+  $listaDePokemones.textContent = '';
 
   infoPokemones.forEach(($pokemon) => {
     const { name, url } = $pokemon;
@@ -137,7 +138,7 @@ const configurarBotonAnteriorYSiguiente = (
 
 const mostrarCantidadDePokemones = (cantidadDePokemones) => {
   const $cantidadDePokemones = document.querySelector('#cantidad-de-pokemones');
-  $cantidadDePokemones.innerHTML = `Hay ${cantidadDePokemones} Pokemones, selecciona uno para ver la info`;
+  $cantidadDePokemones.textContent = `Hay ${cantidadDePokemones} Pokemones, selecciona uno para ver la info`;
 };
 
 const mostrarPaginaActual = (numeroDePagina) => {
@@ -177,4 +178,4 @@ const crearPaginador = (
   }
 };
 
-export { armarBotonesPokemones, mostrarCantidadDePokemones, crearPaginador };
+export { armarListaPokemones, mostrarCantidadDePokemones, crearPaginador };
