@@ -82,7 +82,6 @@ function mostrarDetallesPoekmon(urlDePokemon) {
 }
 
 const armarListaPokemones = (infoPokemones) => {
-  console.log(infoPokemones);
   const $listaDePokemones = document.querySelector('#botonera-pokemon');
   $listaDePokemones.textContent = '';
 
