@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">86.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/15</span>
+                <span class='fraction'>13/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">86.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/15</span>
+                <span class='fraction'>13/15</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -89,54 +89,57 @@
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">async function <span class="fstat-no" title="function not covered" >fetchPokemon(</span>paginaPokemon) {
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const respuestaApi = <span class="cstat-no" title="statement not covered" >await fetch(paginaPokemon);</span>
-    const respuestaApiEnJson = <span class="cstat-no" title="statement not covered" >await respuestaApi.json();</span>
-<span class="cstat-no" title="statement not covered" >    return respuestaApiEnJson;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">async function fetchPokemon(paginaPokemon) {
+  try {
+    const respuestaApi = await fetch(paginaPokemon);
+    const respuestaApiEnJson = await respuestaApi.json();
+    return respuestaApiEnJson;
   } catch (error) {
 <span class="cstat-no" title="statement not covered" >    return console.error('falló cargar la pagina, intente nuevamente', error);</span>
   }
 }
-export default async function <span class="fstat-no" title="function not covered" >fetchPagina(</span>key) {
-  const input = <span class="cstat-no" title="statement not covered" >Number(key);</span>
-<span class="cstat-no" title="statement not covered" >  if (Number.isNaN(input)) { // si el input no es un numero, la funcion intentara buscar un pokemon</span>
-<span class="cstat-no" title="statement not covered" >    return fetchPokemon(key);</span>
+export default async function fetchPagina(key) {
+  const input = Number(key);
+  if (Number.isNaN(input)) {
+    // si el input no es un numero de pagina, la funcion busca un pokemon
+    return fetchPokemon(key);
   }
 &nbsp;
-  const offsetSegunPagina = <span class="cstat-no" title="statement not covered" >(key - 1) * 20;</span>
-  const direccionApi = <span class="cstat-no" title="statement not covered" >`https://pokeapi.co/api/v2/pokemon?offset=${offsetSegunPagina}&amp;limit=20`;</span>
+  const offsetSegunPagina = (key - 1) * 20;
+  const direccionApi = `https://pokeapi.co/api/v2/pokemon?offset=${offsetSegunPagina}&amp;limit=20`;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const respuestaApi = <span class="cstat-no" title="statement not covered" >await fetch(direccionApi);</span>
-    const respuestaApiEnJson = <span class="cstat-no" title="statement not covered" >await respuestaApi.json();</span>
-<span class="cstat-no" title="statement not covered" >    return respuestaApiEnJson;</span>
+  try {
+    const respuestaApi = await fetch(direccionApi);
+    const respuestaApiEnJson = await respuestaApi.json();
+    return respuestaApiEnJson;
   } catch (error) {
 <span class="cstat-no" title="statement not covered" >    return console.error('falló cargar la pagina, intente nuevamente', error);</span>
   }
@@ -148,7 +151,7 @@ export default async function <span class="fstat-no" title="function not covered
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-07T15:01:59.080Z
+                at 2022-10-10T20:52:06.274Z
             </div>
         <script src="../prettify.js"></script>
         <script>

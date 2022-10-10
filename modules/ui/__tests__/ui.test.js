@@ -1,15 +1,10 @@
 /** * @jest-environment jsdom */
 /// <reference types="Jest"/>
 
-import { mostrarCantidadDePokemones, armarListaPokemones } from '../ui.js';
+import { armarListaPokemones, crearPaginador } from '../ui.js';
 import lista1Pokemon from './fixtures/lista1Pokemon.js';
 import lista5Pokemones from './fixtures/lista5Pokemons';
-
-test('prueba que muestre correctamente la cantidad de pokemones', () => {
-  document.body.innerHTML = '<div id="cantidad-de-pokemones"></div>';
-  mostrarCantidadDePokemones(10);
-  expect(document.querySelector('#cantidad-de-pokemones').textContent).toContain('10');
-});
+import fixture from './fixtures/fixture';
 
 test('prueba que la lista de pokemons se arme con solo 1 pokemon', () => {
   document.body.innerHTML = '<div id="botonera-pokemon"></div>';
@@ -27,4 +22,17 @@ test('prueba que la lista de pokemons se arme con 5 pokemons', () => {
   expect(document.querySelectorAll('button')[3].innerText).toContain(lista5Pokemones[3].name);
   expect(document.querySelectorAll('button')[4].innerText).toContain(lista5Pokemones[4].name);
   expect(document.querySelectorAll('button')).toHaveLength(5);
+});
+
+test('Prueba el paginador con 1 pagina, 10 pokemons, y que la pagina activa sea la 1', () => {
+  document.body.innerHTML = fixture;
+  crearPaginador(2, 10);
+  expect(document.querySelector('#paginador').innerHTML).toContain('pagina-activa');
+  expect(document.querySelector('#pagina-activa').innerText).toBe(1);
+  expect(document.querySelector('#pagina-activa').classList).toContain('page-link');
+  expect(document.querySelector('#pagina-actual').innerText).toBe('Página 1');
+  expect(document.querySelectorAll('.page-item')).toHaveLength(2);
+  expect(document.querySelector('#cantidad-de-pokemones').innerHTML).toBe(
+    'Hay 10 Pokemones, selecciona uno para ver la info',
+  );
 });
