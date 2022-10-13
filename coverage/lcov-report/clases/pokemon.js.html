@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/11</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/11</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -136,31 +136,31 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">class Pokemon {
@@ -175,7 +175,7 @@
    * @param {Number} peso
    * @param {Number} altura
    */
-<span class="fstat-no" title="function not covered" >  co</span>nstructor(
+  constructor(
     id,
     nombre,
     foto1,
@@ -186,20 +186,20 @@
     tipos = <span class="branch-0 cbranch-no" title="branch not covered" >[],</span>
     movimientos = <span class="branch-0 cbranch-no" title="branch not covered" >[],</span>
   ) {
-<span class="cstat-no" title="statement not covered" >    this.id = id;</span>
-<span class="cstat-no" title="statement not covered" >    this.nombre = nombre;</span>
-<span class="cstat-no" title="statement not covered" >    this.foto1 = foto1;</span>
-<span class="cstat-no" title="statement not covered" >    this.foto2 = foto2;</span>
-<span class="cstat-no" title="statement not covered" >    this.peso = peso;</span>
-<span class="cstat-no" title="statement not covered" >    this.altura = altura;</span>
-<span class="cstat-no" title="statement not covered" >    this.habilidades = habilidades;</span>
-<span class="cstat-no" title="statement not covered" >    this.tipos = tipos;</span>
-<span class="cstat-no" title="statement not covered" >    this.movimientos = movimientos;</span>
+    this.id = id;
+    this.nombre = nombre;
+    this.foto1 = foto1;
+    this.foto2 = foto2;
+    this.peso = peso;
+    this.altura = altura;
+    this.habilidades = habilidades;
+    this.tipos = tipos;
+    this.movimientos = movimientos;
   }
 }
 &nbsp;
-export default function <span class="fstat-no" title="function not covered" >construirPokemon(</span>infoPokemon) {
-  const pokemon = <span class="cstat-no" title="statement not covered" >new Pokemon(</span>
+export default function construirPokemon(infoPokemon) {
+  const pokemon = new Pokemon(
     infoPokemon.id,
     infoPokemon.name,
     infoPokemon.sprites.other.dream_world.front_default,
@@ -210,7 +210,7 @@ export default function <span class="fstat-no" title="function not covered" >con
     infoPokemon.types,
     infoPokemon.moves,
   );
-<span class="cstat-no" title="statement not covered" >  return pokemon;</span>
+  return pokemon;
 }
 export { construirPokemon };
 &nbsp;</pre></td></tr></table></pre>
@@ -220,7 +220,7 @@ export { construirPokemon };
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-10T20:52:06.274Z
+                at 2022-10-13T16:13:59.073Z
             </div>
         <script src="../prettify.js"></script>
         <script>

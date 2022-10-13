@@ -3,7 +3,6 @@
 /// <reference types="Jest"/>
 
 import fetchPagina from '../api';
-// import pagina1 from './fixtures/pagina1.json';
 
 beforeEach(() => {
   global.fetch = jest.fn();
