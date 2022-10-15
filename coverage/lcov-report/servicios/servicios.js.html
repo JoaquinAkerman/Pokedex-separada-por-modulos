@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">81.81% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/11</span>
+                <span class='fraction'>9/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">81.81% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/11</span>
+                <span class='fraction'>9/11</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -88,18 +88,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -108,19 +108,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import fetchPagina from '../api/api.js';
 import { guardarPaginaEnLocalStorage, buscarEnLocalStorage } from '../storage/storage.js';
 &nbsp;
-export default async function <span class="fstat-no" title="function not covered" >buscarPagina(</span>pagina) {
-<span class="cstat-no" title="statement not covered" >  if (pagina === undefined) {</span>
-<span class="cstat-no" title="statement not covered" >    throw new Error('Se necesita una direccion para cargar la pagina');</span>
+export default async function buscarPagina(pagina) {
+  if (pagina === undefined) {
+    throw new Error('Se necesita una direccion para cargar la pagina');
   }
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const paginaEnLocalStorage = <span class="cstat-no" title="statement not covered" >buscarEnLocalStorage(pagina);</span>
-<span class="cstat-no" title="statement not covered" >    if (paginaEnLocalStorage === null) {</span>
-      const respuestaDeApi = <span class="cstat-no" title="statement not covered" >await fetchPagina(pagina);</span>
-<span class="cstat-no" title="statement not covered" >      guardarPaginaEnLocalStorage(pagina, respuestaDeApi);</span>
+  try {
+    const paginaEnLocalStorage = buscarEnLocalStorage(pagina);
+    if (paginaEnLocalStorage === null) {
+      const respuestaDeApi = await fetchPagina(pagina);
+      guardarPaginaEnLocalStorage(pagina, respuestaDeApi);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      return respuestaDeApi;</span>
+      return respuestaDeApi;
     }
-<span class="cstat-no" title="statement not covered" >    return paginaEnLocalStorage;</span>
+    return paginaEnLocalStorage;
   } catch (error) {
     const mensajeError = <span class="cstat-no" title="statement not covered" >console.error('falló cargar la pagina, intente nuevamente', error);</span>
 <span class="cstat-no" title="statement not covered" >    return mensajeError;</span>
@@ -133,7 +133,7 @@ export default async function <span class="fstat-no" title="function not covered
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-13T16:13:59.073Z
+                at 2022-10-15T20:13:02.155Z
             </div>
         <script src="../prettify.js"></script>
         <script>

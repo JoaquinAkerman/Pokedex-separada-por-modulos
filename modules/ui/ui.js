@@ -14,10 +14,10 @@ function mostarMovimientos(movimientos) {
 }
 
 const mostrarTipos = (tipos) => {
-  const detallesTipos = [];
-  tipos.forEach((tiposPokemon) => {
-    detallesTipos.push(` "${tiposPokemon.type.name}"`);
+  const detallesTipos = tipos.map((item) => {
+    return ` "${item.type.name}"`;
   });
+
   if (detallesTipos.length === 0) {
     return 'Tipos: No hay info';
   }
@@ -73,15 +73,7 @@ const armarTarjetaDePokemon = (pokemon) => {
   mostrarYOcultarCargando();
 };
 
-function mostrarDetallesPoekmon(urlDePokemon) {
-  const detalles = buscarPagina(urlDePokemon);
-  detalles.then((specsPokemon) => {
-    const pokemon = construirPokemon(specsPokemon);
-    armarTarjetaDePokemon(pokemon);
-  });
-}
-
-const armarListaPokemones = (infoPokemones) => {
+const armarListaPokemones = (infoPokemones, mostrarPokemon = () => {}) => {
   const $listaDePokemones = document.querySelector('#botonera-pokemon');
   $listaDePokemones.textContent = '';
 
@@ -95,7 +87,11 @@ const armarListaPokemones = (infoPokemones) => {
     option.classList = 'botones btn btn-dark ';
     $listaDePokemones.append(option);
     option.addEventListener('click', (e) => {
-      mostrarDetallesPoekmon(e.target.dataset.url);
+      const detalles = buscarPagina(e.target.dataset.url);
+      detalles.then((specsPokemon) => {
+        const pokemon = construirPokemon(specsPokemon);
+        mostrarPokemon(pokemon);
+      });
     });
   });
 };
@@ -177,4 +173,4 @@ const crearPaginador = (
   }
 };
 
-export { armarListaPokemones, mostrarCantidadDePokemones, crearPaginador };
+export { armarListaPokemones, mostrarCantidadDePokemones, crearPaginador, armarTarjetaDePokemon };
