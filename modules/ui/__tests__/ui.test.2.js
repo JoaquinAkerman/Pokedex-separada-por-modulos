@@ -2,14 +2,14 @@
 /* eslint-disable object-curly-newline */
 /// <reference types="Jest"/>
 
-import { armarTarjetaDePokemon } from '../ui.js';
+import { mostrarPokemonSeleccionado } from '../ui.js';
 import fixture from './fixtures/fixture';
 import bulbasaur from './fixtures/bulbasaur.json';
 
 test('prueba que se arme correctamente la tarjeta con bulbasaur', () => {
   document.body.innerHTML = fixture;
-  armarTarjetaDePokemon(bulbasaur);
-  const { nombre, id, foto1, peso, altura } = bulbasaur;
+  mostrarPokemonSeleccionado(bulbasaur);
+  const { nombre, id, foto1, peso, altura, tipos, habilidades, movimientos } = bulbasaur;
   const $nombrePokemon = document.querySelector('#nombre');
   const $IDPokemon = document.querySelector('#ID');
   const $imagenPokemon = document.querySelector('#imagen-pokemon');
@@ -23,7 +23,7 @@ test('prueba que se arme correctamente la tarjeta con bulbasaur', () => {
   expect($imagenPokemon.src).toContain(foto1);
   expect($pesoPokemon.innerText).toContain(`Peso: ${peso}`);
   expect($alturaPokemon.innerText).toContain(`Altura: ${altura}`);
-  expect($tipoPokemon.innerText).toContain('Tipos: "grass", "poison"');
-  expect($habilidadesPokemon.innerText).toContain('Habilidades: "overgrow", "chlorophyll"');
-  expect($movimientosPokemon.innerText).toContain('Movimientos: "razor-wind"');
+  expect($tipoPokemon.innerText).toContain(`Tipos:${tipos}`);
+  expect($habilidadesPokemon.innerText).toContain(`Habilidades:${habilidades}`);
+  expect($movimientosPokemon.innerText).toContain(`Movimientos:${movimientos}`);
 });

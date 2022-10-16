@@ -43,9 +43,15 @@ export default function construirPokemon(infoPokemon) {
     sprites.front_default,
     weight,
     height,
-    abilities,
-    types,
-    moves,
+    abilities.map((item) => {
+      return ` "${item.ability.name}"`;
+    }),
+    types.map((item) => {
+      return ` "${item.type.name}"`;
+    }),
+    moves.map((item) => {
+      return ` "${item.move.name}"`;
+    }),
   );
   return pokemon;
 }
