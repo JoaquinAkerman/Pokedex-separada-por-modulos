@@ -2,39 +2,6 @@
 import buscarPagina from '../servicios/servicios.js';
 import { construirPokemon } from '../clases/pokemon.js';
 
-function mostarMovimientos(movimientos) {
-  const detallesMovimientos = [];
-  movimientos.forEach((movimientosPokemon) => {
-    detallesMovimientos.push(` "${movimientosPokemon.move.name}"`);
-  });
-  if (detallesMovimientos.length === 0) {
-    return 'Movimientos: No hay info';
-  }
-  return `Movimientos:${detallesMovimientos}`;
-}
-
-const mostrarTipos = (tipos) => {
-  const detallesTipos = [];
-  tipos.forEach((tiposPokemon) => {
-    detallesTipos.push(` "${tiposPokemon.type.name}"`);
-  });
-  if (detallesTipos.length === 0) {
-    return 'Tipos: No hay info';
-  }
-  return `Tipos:${detallesTipos}`;
-};
-
-const mostrarHabilidades = (habilidades) => {
-  const detallesHabilidades = [];
-  habilidades.forEach((habilidadesPokemon) => {
-    detallesHabilidades.push(` "${habilidadesPokemon.ability.name}"`);
-  });
-  if (detallesHabilidades.length === 0) {
-    return 'Habilidades: No hay info';
-  }
-  return `Habilidades:${detallesHabilidades}`;
-};
-
 function mostrarFoto(foto1, foto2) {
   let fotoDePokemon = foto1;
   if (foto1 === null) {
@@ -51,7 +18,7 @@ const mostrarYOcultarCargando = () => {
   const avisoCargando = document.querySelector('#aviso-cargando');
   avisoCargando.classList.toggle('oculto');
 };
-const armarTarjetaDePokemon = (pokemon) => {
+const mostrarPokemonSeleccionado = (pokemon) => {
   mostrarYOcultarCargando();
   const { id, nombre, foto1, foto2, habilidades, tipos, movimientos, peso, altura } = pokemon;
   const $nombrePokemon = document.querySelector('#nombre');
@@ -67,21 +34,13 @@ const armarTarjetaDePokemon = (pokemon) => {
   $IDPokemon.innerText = `ID: ${id}`;
   $pesoPokemon.innerText = `Peso: ${peso}`;
   $alturaPokemon.innerText = `Altura: ${altura}`;
-  $tipoPokemon.innerText = mostrarTipos(tipos);
-  $habilidadesPokemon.innerText = mostrarHabilidades(habilidades);
-  $movimientosPokemon.innerText = mostarMovimientos(movimientos);
+  $tipoPokemon.innerText = `Tipos:${tipos}`;
+  $habilidadesPokemon.innerText = `Habilidades:${habilidades}`;
+  $movimientosPokemon.innerText = `Movimientos:${movimientos}`;
   mostrarYOcultarCargando();
 };
 
-function mostrarDetallesPoekmon(urlDePokemon) {
-  const detalles = buscarPagina(urlDePokemon);
-  detalles.then((specsPokemon) => {
-    const pokemon = construirPokemon(specsPokemon);
-    armarTarjetaDePokemon(pokemon);
-  });
-}
-
-const armarListaPokemones = (infoPokemones) => {
+const armarListaPokemones = (infoPokemones, mostrarPokemon = () => {}) => {
   const $listaDePokemones = document.querySelector('#botonera-pokemon');
   $listaDePokemones.textContent = '';
 
@@ -95,7 +54,11 @@ const armarListaPokemones = (infoPokemones) => {
     option.classList = 'botones btn btn-dark ';
     $listaDePokemones.append(option);
     option.addEventListener('click', (e) => {
-      mostrarDetallesPoekmon(e.target.dataset.url);
+      const detalles = buscarPagina(e.target.dataset.url);
+      detalles.then((specsPokemon) => {
+        const pokemon = construirPokemon(specsPokemon);
+        mostrarPokemon(pokemon);
+      });
     });
   });
 };
@@ -177,4 +140,9 @@ const crearPaginador = (
   }
 };
 
-export { armarListaPokemones, mostrarCantidadDePokemones, crearPaginador };
+export {
+  armarListaPokemones,
+  mostrarCantidadDePokemones,
+  crearPaginador,
+  mostrarPokemonSeleccionado,
+};

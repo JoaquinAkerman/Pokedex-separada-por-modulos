@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 class Pokemon {
   /**
    * @param {Number} id
@@ -34,16 +35,23 @@ class Pokemon {
 }
 
 export default function construirPokemon(infoPokemon) {
+  const { id, name, sprites, weight, height, abilities, types, moves } = infoPokemon;
   const pokemon = new Pokemon(
-    infoPokemon.id,
-    infoPokemon.name,
-    infoPokemon.sprites.other.dream_world.front_default,
-    infoPokemon.sprites.front_default,
-    infoPokemon.weight,
-    infoPokemon.height,
-    infoPokemon.abilities,
-    infoPokemon.types,
-    infoPokemon.moves,
+    id,
+    name,
+    sprites.other.dream_world.front_default,
+    sprites.front_default,
+    weight,
+    height,
+    abilities.map((item) => {
+      return ` "${item.ability.name}"`;
+    }),
+    types.map((item) => {
+      return ` "${item.type.name}"`;
+    }),
+    moves.map((item) => {
+      return ` "${item.move.name}"`;
+    }),
   );
   return pokemon;
 }

@@ -4,6 +4,7 @@ module.exports = {
   overrides: [],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   rules: {
+    'object-curly-newline:': 'off',
     'arrow-body-style': ['error', 'always'],
     'import/extensions': 'off',
     'no-console': 'off',
