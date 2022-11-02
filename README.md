@@ -3,4 +3,6 @@
 
 #Pokedex que consume datos de https://pokeapi.co/api/v2. 
 
+Unit test con Jest, y tests de integración con Cypress
+
 
