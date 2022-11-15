@@ -91,8 +91,5 @@ test('prueba que construir pokemon funcione correctamente', () => {
       ' "grassy-terrain"',
       ' "confide"',
     ],
-
-    // tipos: bulbasaur.types,
-    // movimientos: bulbasaur.moves,
   });
 });
