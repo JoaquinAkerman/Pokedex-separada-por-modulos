@@ -1,6 +1,7 @@
 
 node_modules/
 node_modules/
+coverage/
 cypress.json
 cypress/fixtures/example.json
 cypress/integration/examples/actions.spec.js

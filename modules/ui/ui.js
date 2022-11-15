@@ -1,6 +1,6 @@
 /* eslint-disable object-curly-newline */
 import buscarPagina from '../servicios/servicios.js';
-import { construirPokemon } from '../clases/pokemon.js';
+import { construirPokemon } from '../pokemon/pokemon.js';
 
 function mostrarFoto(foto1, foto2) {
   let fotoDePokemon = foto1;
